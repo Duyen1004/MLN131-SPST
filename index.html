@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hành Trình Thoát Khỏi Hang Động Plato - vượt mê cung hang động bằng tri thức triết học">
+    <title>Hành Trình Thoát Khỏi Hang Động Plato</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Philosopher:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="particles"></div>
+    <div id="lightOverlay"></div>
+    <div id="shadowCreatures"></div>
+    <div id="fireEmbers"></div>
+
+    <div id="startScreen" class="screen active">
+        <div class="bg-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+
+        <div class="start-layout">
+            <div class="hero-image-section">
+                <div class="hero-image-wrapper">
+                    <div class="hero-glow"></div>
+                    <img src="plato.png" alt="Plato tại cửa hang động" class="hero-image">
+                    <div class="hero-overlay"></div>
+                </div>
+                <p class="hero-caption">Bước qua bóng tối, mở từng cánh cổng bằng tri thức</p>
+            </div>
+
+            <div class="start-content">
+                <div class="intro-badge">Phiên bản mê cung triết học</div>
+                <h1 class="main-title">
+                    <span class="title-line">HÀNH TRÌNH</span>
+                    <span class="title-line accent">THOÁT KHỎI</span>
+                    <span class="title-line">HANG ĐỘNG PLATO</span>
+                </h1>
+                <p class="subtitle">Di chuyển từng bước trong hang, vượt cổng tri thức để tìm đường ra ánh sáng.</p>
+
+                <div class="start-meta">
+                    <span>Mỗi chương là một ải riêng</span>
+                    <span>Cuối ải có thử thách vượt ải</span>
+                    <span>Qua hết các ải để hoàn thành học phần</span>
+                </div>
+
+                <div class="story-box">
+                    <p class="story-text">
+                        Bạn sẽ vượt qua từng <strong>ải theo chương học</strong>. Trong mỗi ải, bạn di chuyển qua
+                        các cổng tri thức gắn với nội dung của chương đó. Khi kết thúc ải, một màn
+                        <strong>Thử thách vượt ải</strong> sẽ xuất hiện để ôn tập trước khi sang chương tiếp theo.
+                    </p>
+                    <div class="warning-text">
+                        <span class="warning-icon">!</span>
+                        Trả lời sai sẽ mất mạng và khiến bóng tối tiến gần hơn.
+                    </div>
+                </div>
+
+                <div class="game-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">◆</span>
+                        <div>
+                            <strong>Mỗi Chương Một Ải</strong>
+                            <p>Học theo từng cụm kiến thức</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✦</span>
+                        <div>
+                            <strong>Cổng Tri Thức</strong>
+                            <p>Câu hỏi theo đúng chương</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">☼</span>
+                        <div>
+                            <strong>Thử Thách Vượt Ải</strong>
+                            <p>Ôn tập trước khi sang ải mới</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btnStart" class="btn-primary" onclick="startGame()">
+                    <span class="btn-text">Vào hang động</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameScreen" class="screen">
+        <div id="caveEnvironment">
+            <div class="cave-walls"></div>
+            <div class="cave-stalactites"></div>
+            <div id="lightSource" class="light-source"></div>
+        </div>
+
+        <div class="game-hud">
+            <div class="hud-item hud-item-left">
+                <span class="hud-label">Xiềng xích</span>
+                <div id="chainsDisplay" class="chains-display">
+                    <span class="chain active" data-chain="1">◆</span>
+                    <span class="chain active" data-chain="2">◆</span>
+                    <span class="chain active" data-chain="3">◆</span>
+                    <span class="chain active" data-chain="4">◆</span>
+                    <span class="chain active" data-chain="5">◆</span>
+                </div>
+            </div>
+
+            <div class="hud-item hud-item-center">
+                <div id="stageBadge" class="stage-badge">Ải 1</div>
+                <div class="progress-label">Tiến trình thoát hang</div>
+                <div class="progress-bar-container">
+                    <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                    <div id="progressText" class="progress-text">0%</div>
+                </div>
+            </div>
+
+            <div class="hud-item hud-item-right">
+                <span class="hud-label">Mạng sống</span>
+                <div id="livesDisplay" class="lives-display">
+                    <span class="life active" data-life="1">♥</span>
+                    <span class="life active" data-life="2">♥</span>
+                    <span class="life active" data-life="3">♥</span>
+                    <span class="life active" data-life="4">♥</span>
+                    <span class="life active" data-life="5">♥</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-layout">
+            <section class="maze-stage">
+                <div class="maze-header">
+                    <div>
+                        <p class="maze-kicker">Mê cung hang động</p>
+                        <h2 id="mazeTitle" class="maze-title">Ải 1 - Tìm đường tới cửa thoát</h2>
+                        <p id="stageSubtitle" class="maze-subtitle">Chương hiện tại sẽ xuất hiện ở đây.</p>
+                    </div>
+                    <div class="maze-legend">
+                        <span><i class="legend-dot player-dot"></i>Bạn</span>
+                        <span><i class="legend-dot gate-dot"></i>Cổng tri thức</span>
+                        <span><i class="legend-dot exit-dot"></i>Lối ra</span>
+                    </div>
+                </div>
+
+                <div id="mazeMap" class="maze-map">
+                    <div class="stage-sky"></div>
+                    <div class="stage-haze"></div>
+                    <div class="maze-glow"></div>
+                    <div class="stage-landmark" id="stageLandmark">
+                        <div class="landmark-roof"></div>
+                        <div class="landmark-body"></div>
+                        <div class="landmark-door"></div>
+                        <div class="landmark-light"></div>
+                    </div>
+                    <div class="stage-people">
+                        <div class="person person-a"></div>
+                        <div class="person person-b"></div>
+                        <div class="person person-c"></div>
+                    </div>
+                    <div class="maze-path maze-path-a"></div>
+                    <div class="maze-path maze-path-b"></div>
+                    <div class="maze-path maze-path-c"></div>
+                    <div class="maze-path maze-path-d"></div>
+                    <div class="maze-path maze-path-e"></div>
+                    <div class="maze-path maze-path-f"></div>
+                    <div class="maze-path maze-path-g"></div>
+                    <div class="maze-path maze-path-h"></div>
+                    <div class="maze-path maze-path-i"></div>
+                    <div class="maze-path maze-path-j"></div>
+                    <div id="mazeNodes"></div>
+                    <div id="playerToken" class="player-token">
+                        <div class="player-shadow"></div>
+                        <div class="player-head"></div>
+                        <div class="player-body"></div>
+                        <div class="player-arm arm-left"></div>
+                        <div class="player-arm arm-right"></div>
+                        <div class="player-leg leg-left"></div>
+                        <div class="player-leg leg-right"></div>
+                    </div>
+                    <div id="exitPortal" class="exit-portal">Cổng ánh sáng</div>
+                </div>
+            </section>
+
+            <aside class="control-panel">
+                <div class="panel-card journey-card">
+                    <p class="panel-kicker">Vị trí hiện tại</p>
+                    <h3 id="currentStepLabel" class="panel-title">Điểm khởi đầu</h3>
+                    <p id="movementHint" class="panel-text">
+                        Tiến về phía trước để dò đường trong hang. Khi gặp cổng bị khóa, bạn phải trả lời đúng để mở lối.
+                    </p>
+                    <div class="control-buttons">
+                        <button id="btnBack" class="btn-control btn-secondary" onclick="movePlayer(-1)">← Lùi lại</button>
+                        <button id="btnForward" class="btn-control" onclick="movePlayer(1)">Tiến lên →</button>
+                    </div>
+                </div>
+
+                <div class="panel-card gate-card">
+                    <p class="panel-kicker">Thông tin ải</p>
+                    <h3 id="stageTitle" class="panel-title">Chương 1</h3>
+                    <p id="stageObjective" class="panel-text">
+                        Mục tiêu của ải hiện tại sẽ hiển thị ở đây.
+                    </p>
+                </div>
+
+                <div class="panel-card gate-card">
+                    <p class="panel-kicker">Cổng gần nhất</p>
+                    <h3 id="gateTitle" class="panel-title">Chưa chạm cổng</h3>
+                    <p id="gateStatusText" class="panel-text">
+                        Khi chạm vào một cổng tri thức, câu hỏi sẽ hiện ra. Mở hết 5 cổng để tới được lối ra.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <div id="questionModal" class="question-modal hidden">
+            <div class="question-card">
+                <div class="question-header">
+                    <span id="questionNumber" class="q-number">Cổng 1</span>
+                    <span id="questionCategory" class="q-category">Triết học</span>
+                </div>
+                <p id="questionModeLabel" class="question-mode-label">Thử thách cổng tri thức</p>
+                <p id="questionText" class="question-text">Nội dung câu hỏi</p>
+                <div id="answersContainer" class="answers-container"></div>
+                <div id="feedbackArea" class="feedback-area hidden">
+                    <div id="feedbackIcon" class="feedback-icon"></div>
+                    <p id="feedbackText" class="feedback-text"></p>
+                    <p id="explanationText" class="explanation-text"></p>
+                    <button id="btnNext" class="btn-next" onclick="handleQuestionContinue()">Tiếp tục</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="darkness-meter">
+            <div class="darkness-label">Bóng tối vô minh</div>
+            <div class="darkness-bar-container">
+                <div id="darknessBar" class="darkness-bar" style="width: 0%"></div>
+            </div>
+            <div id="shadowWarning" class="shadow-warning hidden">
+                <span class="shadow-pulse">☾</span> Bóng tối đang bò sát phía sau...
+            </div>
+        </div>
+    </div>
+
+    <div id="winScreen" class="screen">
+        <div class="end-content win-content">
+            <div class="sun-burst">
+                <div class="sun-core"></div>
+                <div class="sun-rays"></div>
+            </div>
+            <h1 class="end-title win-title">CHÂN LÝ</h1>
+            <h2 class="end-subtitle">Bạn đã lần ra cửa thoát của hang động</h2>
+            <div class="end-quote">
+                <p>"Kẻ nào đã thấy ánh sáng thì không còn cam lòng sống giữa bóng tối."</p>
+                <span class="quote-author">Plato, Republic</span>
+            </div>
+            <div class="stats-box">
+                <div class="stat-item">
+                    <span class="stat-value" id="winCorrect">0</span>
+                    <span class="stat-label">Ải hoàn thành</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="winWrong">0</span>
+                    <span class="stat-label">Lần sai</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="winLives">0</span>
+                    <span class="stat-label">Mạng còn</span>
+                </div>
+            </div>
+            <p class="end-message">
+                Bạn đã đi hết mê cung, mở từng phong ấn bằng tri thức và bước ra khỏi hang.
+                Hành trình này cho thấy ánh sáng không đến từ may mắn, mà đến từ sự hiểu biết.
+            </p>
+            <button class="btn-primary" onclick="restartGame()">
+                <span class="btn-text">Chơi lại</span>
+                <span class="btn-glow"></span>
+            </button>
+        </div>
+    </div>
+
+    <div id="loseScreen" class="screen">
+        <div class="end-content lose-content">
+            <div class="darkness-vortex">
+                <div class="vortex-ring"></div>
+                <div class="vortex-ring"></div>
+                <div class="vortex-ring"></div>
+            </div>
+            <h1 class="end-title lose-title">VÔ MINH</h1>
+            <h2 class="end-subtitle">Bạn lạc lại giữa mê cung bóng tối</h2>
+            <div class="end-quote">
+                <p>"Những kẻ còn trong hang thường sợ con đường dẫn ra ngoài."</p>
+                <span class="quote-author">Plato, Republic</span>
+            </div>
+            <div class="stats-box">
+                <div class="stat-item">
+                    <span class="stat-value" id="loseCorrect">0</span>
+                    <span class="stat-label">Ải đã qua</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="loseWrong">0</span>
+                    <span class="stat-label">Lần sai</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="loseChains">0</span>
+                    <span class="stat-label">Bước đã đi</span>
+                </div>
+            </div>
+            <p class="end-message">
+                Bóng tối đã giữ bạn lại trước khi chạm tới lối ra.
+                Nhưng chỉ cần dám quay lại và tiếp tục đặt câu hỏi, hành trình tìm ánh sáng vẫn có thể bắt đầu lại.
+            </p>
+            <button class="btn-primary btn-retry" onclick="restartGame()">
+                <span class="btn-text">Thử lại</span>
+                <span class="btn-glow"></span>
+            </button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
