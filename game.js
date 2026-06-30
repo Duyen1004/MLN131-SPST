@@ -1,4 +1,4 @@
-/* =========================================
+﻿/* =========================================
    PLATO'S CAVE ESCAPE - STAGE EDITION
    ========================================= */
 
@@ -425,19 +425,104 @@ const stages = [
     }
 ];
 
-const mazeNodes = [
-    { id: 0, x: 10, y: 16, label: "Cửa vào ải", type: "start" },
-    { id: 1, x: 28, y: 16, label: "Hành lang đầu", type: "path" },
-    { id: 2, x: 28, y: 34, label: "Cổng tri thức 1", type: "gate", gateIndex: 0 },
-    { id: 3, x: 50, y: 34, label: "Khúc quanh đá", type: "path" },
-    { id: 4, x: 50, y: 56, label: "Cổng tri thức 2", type: "gate", gateIndex: 1 },
-    { id: 5, x: 70, y: 56, label: "Đường hầm sâu", type: "path" },
-    { id: 6, x: 70, y: 78, label: "Cổng tri thức 3", type: "gate", gateIndex: 2 },
-    { id: 7, x: 86, y: 78, label: "Thử thách vượt ải", type: "review" },
-    { id: 8, x: 86, y: 90, label: "Cửa sang ải mới", type: "exit" }
+const mazeStageLayouts = [
+    [
+        { id: 0, x: 12, y: 26, label: "Điểm khởi hành", type: "start", image: "images/stage-1-node-1.png" },
+        { id: 1, x: 28, y: 18, label: "Lối mòn cổ", type: "path", image: "images/stage-1-node-2.png" },
+        { id: 2, x: 46, y: 26, label: "Cổng tri thức 1", type: "gate", gateIndex: 0, image: "images/stage-1-node-3.png" },
+        { id: 3, x: 64, y: 18, label: "Cầu dây thử thách", type: "path", image: "images/stage-1-node-4.png" },
+        { id: 4, x: 82, y: 28, label: "Cổng tri thức 2", type: "gate", gateIndex: 1, image: "images/stage-1-node-5.png" },
+        { id: 5, x: 72, y: 56, label: "Tháp quan sát", type: "path", image: "images/stage-1-node-6.png" },
+        { id: 6, x: 54, y: 66, label: "Cổng tri thức 3", type: "gate", gateIndex: 2, image: "images/stage-1-node-7.png" },
+        { id: 7, x: 36, y: 56, label: "Di tích ngầm", type: "path", image: "images/stage-1-node-8.png" },
+        { id: 8, x: 18, y: 68, label: "Thử thách vượt ải", type: "review", image: "images/stage-1-node-9.png" },
+        { id: 9, x: 50, y: 84, label: "Cửa sang ải mới", type: "exit", image: "images/stage-1-node-10.png" }
+    ],
+    [
+        { id: 0, x: 14, y: 20, label: "Đường lên sườn núi", type: "start", image: "images/stage-2-node-1.png" },
+        { id: 1, x: 32, y: 30, label: "Bến đá gãy", type: "path", image: "images/stage-2-node-2.png" },
+        { id: 2, x: 24, y: 50, label: "Cổng tri thức 1", type: "gate", gateIndex: 0, image: "images/stage-2-node-3.png" },
+        { id: 3, x: 42, y: 62, label: "Rừng cột đổ", type: "path", image: "images/stage-2-node-4.png" },
+        { id: 4, x: 62, y: 54, label: "Cổng tri thức 2", type: "gate", gateIndex: 1, image: "images/stage-2-node-5.png" },
+        { id: 5, x: 80, y: 40, label: "Cầu gió biển", type: "path", image: "images/stage-2-node-6.png" },
+        { id: 6, x: 72, y: 20, label: "Cổng tri thức 3", type: "gate", gateIndex: 2, image: "images/stage-2-node-7.png" },
+        { id: 7, x: 56, y: 18, label: "Đỉnh quan sát", type: "path", image: "images/stage-2-node-8.png" },
+        { id: 8, x: 84, y: 68, label: "Thử thách vượt ải", type: "review", image: "images/stage-2-node-9.png" },
+        { id: 9, x: 56, y: 84, label: "Cửa sang ải mới", type: "exit", image: "images/stage-2-node-10.png" }
+    ],
+    [
+        { id: 0, x: 16, y: 24, label: "Mũi đá đầu nguồn", type: "start", image: "images/stage-3-node-1.png" },
+        { id: 1, x: 36, y: 18, label: "Lối bậc thềm", type: "path", image: "images/stage-3-node-2.png" },
+        { id: 2, x: 58, y: 24, label: "Cổng tri thức 1", type: "gate", gateIndex: 0, image: "images/stage-3-node-3.png" },
+        { id: 3, x: 78, y: 18, label: "Cầu nối đá", type: "path", image: "images/stage-3-node-4.png" },
+        { id: 4, x: 84, y: 42, label: "Cổng tri thức 2", type: "gate", gateIndex: 1, image: "images/stage-3-node-5.png" },
+        { id: 5, x: 64, y: 54, label: "Sân đền gió", type: "path", image: "images/stage-3-node-6.png" },
+        { id: 6, x: 42, y: 46, label: "Cổng tri thức 3", type: "gate", gateIndex: 2, image: "images/stage-3-node-7.png" },
+        { id: 7, x: 24, y: 58, label: "Hồ đá phản chiếu", type: "path", image: "images/stage-3-node-8.png" },
+        { id: 8, x: 30, y: 80, label: "Thử thách vượt ải", type: "review", image: "images/stage-3-node-9.png" },
+        { id: 9, x: 58, y: 82, label: "Cửa sang ải mới", type: "exit", image: "images/stage-3-node-10.png" }
+    ],
+    [
+        { id: 0, x: 12, y: 30, label: "Hành lang tháp", type: "start", image: "images/stage-4-node-1.png" },
+        { id: 1, x: 26, y: 18, label: "Bậc đá hẹp", type: "path", image: "images/stage-4-node-2.png" },
+        { id: 2, x: 46, y: 16, label: "Cổng tri thức 1", type: "gate", gateIndex: 0, image: "images/stage-4-node-3.png" },
+        { id: 3, x: 66, y: 26, label: "Vòng canh gác", type: "path", image: "images/stage-4-node-4.png" },
+        { id: 4, x: 78, y: 46, label: "Cổng tri thức 2", type: "gate", gateIndex: 1, image: "images/stage-4-node-5.png" },
+        { id: 5, x: 62, y: 66, label: "Ban công cổ", type: "path", image: "images/stage-4-node-6.png" },
+        { id: 6, x: 40, y: 72, label: "Cổng tri thức 3", type: "gate", gateIndex: 2, image: "images/stage-4-node-7.png" },
+        { id: 7, x: 22, y: 62, label: "Khoang đổ nát", type: "path", image: "images/stage-4-node-8.png" },
+        { id: 8, x: 30, y: 44, label: "Thử thách vượt ải", type: "review", image: "images/stage-4-node-9.png" },
+        { id: 9, x: 52, y: 88, label: "Cửa sang ải mới", type: "exit", image: "images/stage-4-node-10.png" }
+    ],
+    [
+        { id: 0, x: 14, y: 24, label: "Lối vào làng cổ", type: "start", image: "images/stage-5-node-1.png" },
+        { id: 1, x: 34, y: 26, label: "Ngã ba rêu phủ", type: "path", image: "images/stage-5-node-2.png" },
+        { id: 2, x: 54, y: 18, label: "Cổng tri thức 1", type: "gate", gateIndex: 0, image: "images/stage-5-node-3.png" },
+        { id: 3, x: 76, y: 24, label: "Nhà cầu gió", type: "path", image: "images/stage-5-node-4.png" },
+        { id: 4, x: 82, y: 48, label: "Cổng tri thức 2", type: "gate", gateIndex: 1, image: "images/stage-5-node-5.png" },
+        { id: 5, x: 66, y: 68, label: "Sân đá cộng hưởng", type: "path", image: "images/stage-5-node-6.png" },
+        { id: 6, x: 44, y: 72, label: "Cổng tri thức 3", type: "gate", gateIndex: 2, image: "images/stage-5-node-7.png" },
+        { id: 7, x: 24, y: 64, label: "Lạch nước hẹp", type: "path", image: "images/stage-5-node-8.png" },
+        { id: 8, x: 18, y: 44, label: "Thử thách vượt ải", type: "review", image: "images/stage-5-node-9.png" },
+        { id: 9, x: 50, y: 88, label: "Cửa sang ải mới", type: "exit", image: "images/stage-5-node-10.png" }
+    ],
+    [
+        { id: 0, x: 16, y: 18, label: "Cửa điện hòa hợp", type: "start", image: "images/stage-6-node-1.png" },
+        { id: 1, x: 36, y: 28, label: "Sân cột sáng", type: "path", image: "images/stage-6-node-2.png" },
+        { id: 2, x: 58, y: 22, label: "Cổng tri thức 1", type: "gate", gateIndex: 0, image: "images/stage-6-node-3.png" },
+        { id: 3, x: 78, y: 34, label: "Cầu cung nguyệt", type: "path", image: "images/stage-6-node-4.png" },
+        { id: 4, x: 72, y: 56, label: "Cổng tri thức 2", type: "gate", gateIndex: 1, image: "images/stage-6-node-5.png" },
+        { id: 5, x: 52, y: 66, label: "Hành lang thánh điện", type: "path", image: "images/stage-6-node-6.png" },
+        { id: 6, x: 30, y: 58, label: "Cổng tri thức 3", type: "gate", gateIndex: 2, image: "images/stage-6-node-7.png" },
+        { id: 7, x: 20, y: 38, label: "Vườn nước tĩnh", type: "path", image: "images/stage-6-node-8.png" },
+        { id: 8, x: 38, y: 84, label: "Thử thách vượt ải", type: "review", image: "images/stage-6-node-9.png" },
+        { id: 9, x: 64, y: 84, label: "Cửa sang ải mới", type: "exit", image: "images/stage-6-node-10.png" }
+    ]
+];
+
+const worldMapLayout = [
+    { x: 11, y: 58, side: "left" },
+    { x: 27, y: 42, side: "left" },
+    { x: 44, y: 29, side: "center" },
+    { x: 61, y: 34, side: "center" },
+    { x: 77, y: 48, side: "right" },
+    { x: 90, y: 38, side: "right" }
+];
+
+const worldMapIslandImages = [
+    "images/world-island-stage-1-clean.png",
+    "images/world-island-stage-2-clean.png",
+    "images/world-island-stage-3-clean.png",
+    "images/world-island-stage-4-clean.png",
+    "images/world-island-stage-5-clean.png",
+    "images/world-island-stage-6-clean.png"
 ];
 
 let gameState = {};
+
+function getMazeNodes() {
+    return mazeStageLayouts[gameState.stageIndex] || mazeStageLayouts[0];
+}
 
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx = null;
@@ -611,10 +696,14 @@ function updateLighting() {
         )
     `;
 
-    const bgR = 10 + Math.floor((intensity / 100) * 15);
-    const bgG = 12 + Math.floor((intensity / 100) * 12);
-    const bgB = 18 + Math.floor((intensity / 100) * 8);
-    document.body.style.background = `linear-gradient(145deg, rgb(${bgR}, ${bgG}, ${bgB + 10}) 0%, rgb(${bgR + 8}, ${bgG + 6}, ${bgB + 15}) 45%, rgb(${bgR + 12}, ${bgG + 4}, ${bgB}) 100%)`;
+    const bgR = 12 + Math.floor((intensity / 100) * 18);
+    const bgG = 20 + Math.floor((intensity / 100) * 16);
+    const bgB = 30 + Math.floor((intensity / 100) * 14);
+    document.body.style.background = `
+        radial-gradient(circle at top, rgba(255, 214, 107, 0.12), transparent 26%),
+        radial-gradient(circle at 18% 18%, rgba(92, 128, 190, 0.12), transparent 24%),
+        linear-gradient(145deg, rgb(${bgR}, ${bgG}, ${bgB}) 0%, rgb(${bgR + 10}, ${bgG + 8}, ${bgB + 12}) 42%, rgb(${bgR + 18}, ${bgG + 4}, ${bgB - 2}) 100%)
+    `;
 }
 
 function updateDarkness() {
@@ -637,11 +726,199 @@ function showScreen(screenId) {
     document.getElementById(screenId).classList.add("active");
 }
 
+function getWorldStageMeta(stageIndex) {
+    if (stageIndex < gameState.completedStages) {
+        return { state: "is-complete", label: "Đã hoàn thành", chip: "Hoàn thành" };
+    }
+
+    if (stageIndex === gameState.completedStages) {
+        return { state: "is-current", label: "Đang mở", chip: "Sẵn sàng" };
+    }
+
+    return { state: "is-locked", label: `Mở sau khi qua ải ${stageIndex}`, chip: "Bị khóa" };
+}
+
+function canOpenStageFromWorldMap(stageIndex) {
+    return stageIndex <= gameState.completedStages;
+}
+
+function renderWorldMapLinks() {
+    const map = document.querySelector(".world-map");
+    const svg = document.getElementById("worldLinks");
+    if (!map || !svg) return;
+
+    const mapRect = map.getBoundingClientRect();
+    const width = Math.max(1, mapRect.width);
+    const height = Math.max(1, mapRect.height);
+    const radius = Math.min(width, height) * 0.075;
+    const namespace = "http://www.w3.org/2000/svg";
+
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.innerHTML = "";
+
+    for (let index = 0; index < worldMapLayout.length - 1; index += 1) {
+        const start = {
+            x: width * (worldMapLayout[index].x / 100),
+            y: height * (worldMapLayout[index].y / 100)
+        };
+        const end = {
+            x: width * (worldMapLayout[index + 1].x / 100),
+            y: height * (worldMapLayout[index + 1].y / 100)
+        };
+
+        const deltaX = end.x - start.x;
+        const deltaY = end.y - start.y;
+        const distance = Math.hypot(deltaX, deltaY) || 1;
+        const unitX = deltaX / distance;
+        const unitY = deltaY / distance;
+        const normalX = -unitY;
+        const normalY = unitX;
+        const midpointBias = index < 2 ? -1 : index === 2 ? 0.4 : 1;
+        const curveStrength = Math.min(44, distance * 0.12) * midpointBias;
+
+        const fromX = start.x + unitX * radius;
+        const fromY = start.y + unitY * radius;
+        const toX = end.x - unitX * radius;
+        const toY = end.y - unitY * radius;
+        const control1X = fromX + deltaX * 0.3 + normalX * curveStrength;
+        const control1Y = fromY + deltaY * 0.16 + normalY * curveStrength;
+        const control2X = toX - deltaX * 0.3 + normalX * curveStrength;
+        const control2Y = toY - deltaY * 0.16 + normalY * curveStrength;
+        const pathData = `M ${fromX.toFixed(2)} ${fromY.toFixed(2)} C ${control1X.toFixed(2)} ${control1Y.toFixed(2)}, ${control2X.toFixed(2)} ${control2Y.toFixed(2)}, ${toX.toFixed(2)} ${toY.toFixed(2)}`;
+
+        ["world-link-glow", "world-link-line", "world-link-dots"].forEach(className => {
+            const path = document.createElementNS(namespace, "path");
+            path.setAttribute("class", className);
+            path.setAttribute("d", pathData);
+            svg.appendChild(path);
+        });
+    }
+}
+
+function renderWorldMap() {
+    const container = document.getElementById("worldMapNodes");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    stages.forEach((stage, index) => {
+        const point = worldMapLayout[index];
+        const node = document.createElement("article");
+        const meta = getWorldStageMeta(index);
+        node.className = `world-node ${meta.state}`;
+        node.dataset.side = point.side;
+        node.dataset.theme = stage.theme;
+        node.style.left = `${point.x}%`;
+        node.style.top = `${point.y}%`;
+        node.style.setProperty("--world-island-image", `url("${worldMapIslandImages[index]}")`);
+        node.innerHTML = `
+            <div class="world-node-visual">
+                <span class="world-node-ring"></span>
+                <div class="world-island-scene" aria-hidden="true"></div>
+                <span class="world-node-halo"></span>
+                <span class="world-node-number">${index + 1}</span>
+                <span class="world-node-lock">🔒</span>
+            </div>
+            <div class="world-node-card">
+                <p class="world-node-kicker">Ải ${index + 1}</p>
+                <h3 class="world-node-title">${stage.landmark}</h3>
+                <p class="world-node-meta">${meta.label}</p>
+                <span class="world-node-chip">${meta.chip}</span>
+            </div>
+        `;
+
+        if (canOpenStageFromWorldMap(index)) {
+            node.classList.add("is-clickable");
+            node.addEventListener("click", () => openStageFromWorldMap(index));
+        }
+
+        container.appendChild(node);
+    });
+
+    requestAnimationFrame(renderWorldMapLinks);
+}
+
+function renderMazeLinks() {
+    const mazeNodes = getMazeNodes();
+    const map = document.getElementById("mazeMap");
+    const svg = document.getElementById("mazeLinks");
+    if (!map || !svg) return;
+
+    const mapRect = map.getBoundingClientRect();
+    const width = Math.max(1, mapRect.width);
+    const height = Math.max(1, mapRect.height);
+    const namespace = "http://www.w3.org/2000/svg";
+
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.innerHTML = "";
+
+    for (let index = 0; index < mazeNodes.length - 1; index += 1) {
+        const start = mazeNodes[index];
+        const end = mazeNodes[index + 1];
+        const startX = width * (start.x / 100);
+        const startY = height * (start.y / 100);
+        const endX = width * (end.x / 100);
+        const endY = height * (end.y / 100);
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        const distance = Math.hypot(deltaX, deltaY) || 1;
+        const unitX = deltaX / distance;
+        const unitY = deltaY / distance;
+        const normalX = -unitY;
+        const normalY = unitX;
+        const curveStrength = Math.min(32, distance * 0.12) * (index % 2 === 0 ? -1 : 1);
+        const controlX = (startX + endX) / 2 + normalX * curveStrength;
+        const controlY = (startY + endY) / 2 + normalY * curveStrength;
+        const pathData = `M ${startX.toFixed(2)} ${startY.toFixed(2)} Q ${controlX.toFixed(2)} ${controlY.toFixed(2)} ${endX.toFixed(2)} ${endY.toFixed(2)}`;
+
+        ["maze-link-shadow", "maze-link-track"].forEach(className => {
+            const path = document.createElementNS(namespace, "path");
+            path.setAttribute("class", className);
+            path.setAttribute("d", pathData);
+            svg.appendChild(path);
+        });
+
+        const progressPath = document.createElementNS(namespace, "path");
+        const isActive = index < gameState.playerNode || (index === gameState.playerNode && gameState.playerNode === mazeNodes.length - 1);
+        progressPath.setAttribute("class", `maze-link-progress${isActive ? " is-active" : ""}`);
+        progressPath.setAttribute("d", pathData);
+        svg.appendChild(progressPath);
+    }
+}
+
+function showWorldMapScreen() {
+    if (gameState.questionOpen) {
+        closeQuestionModal();
+    }
+    renderWorldMap();
+    showScreen("worldMapScreen");
+}
+
+function openStageFromWorldMap(stageIndex) {
+    if (!canOpenStageFromWorldMap(stageIndex)) return;
+
+    loadStage(stageIndex);
+    closeQuestionModal();
+    showScreen("gameScreen");
+}
+
+function backToStart() {
+    document.body.style.background =
+        "radial-gradient(circle at top, rgba(255, 214, 107, 0.12), transparent 26%), radial-gradient(circle at 18% 18%, rgba(92, 128, 190, 0.12), transparent 24%), linear-gradient(145deg, #0f1724 0%, #182334 34%, #2d2539 68%, #0c1118 100%)";
+    document.getElementById("lightOverlay").style.background = "transparent";
+    document.getElementById("lightOverlay").style.boxShadow = "none";
+    closeQuestionModal();
+    showScreen("startScreen");
+    createParticles();
+    createFireEmbers();
+}
+
 function buildMaze() {
+    const mazeNodes = getMazeNodes();
     const container = document.getElementById("mazeNodes");
     container.innerHTML = "";
 
-    mazeNodes.forEach(node => {
+    mazeNodes.forEach((node, nodeIndex) => {
         const el = document.createElement("div");
         let className = "maze-node";
         if (node.type === "gate") className += " gate";
@@ -653,31 +930,51 @@ function buildMaze() {
         el.dataset.nodeType = node.type;
         el.style.left = `${node.x}%`;
         el.style.top = `${node.y}%`;
+        el.style.setProperty("--maze-node-image", `url("${node.image}")`);
+        const visual = document.createElement("div");
+        visual.className = "maze-node-visual";
+        const ring = document.createElement("span");
+        ring.className = "maze-node-ring";
+        const scene = document.createElement("div");
+        scene.className = "maze-node-scene";
         const marker = document.createElement("span");
         marker.className = "node-marker";
         if (node.type === "gate") marker.textContent = `${node.gateIndex + 1}`;
         else if (node.type === "review") marker.textContent = "!";
         else if (node.type === "exit") marker.textContent = ">";
         else if (node.type === "start") marker.textContent = "S";
-        else marker.textContent = ".";
+        else marker.textContent = `${nodeIndex + 1}`;
         const label = document.createElement("span");
         label.className = "node-label";
-        if (node.type === "gate") label.textContent = `Mốc ${node.gateIndex + 1}`;
+        if (node.type === "gate") label.textContent = `Cổng ${node.gateIndex + 1}`;
         else if (node.type === "review") label.textContent = "Ôn tập";
         else if (node.type === "exit") label.textContent = "Lối ra";
         else if (node.type === "start") label.textContent = "Bắt đầu";
-        else label.textContent = "Trạm";
-        el.appendChild(marker);
+        else label.textContent = node.label;
+        visual.appendChild(ring);
+        visual.appendChild(scene);
+        visual.appendChild(marker);
+        el.appendChild(visual);
         el.appendChild(label);
+        el.addEventListener("click", () => {
+            if (Math.abs(nodeIndex - gameState.playerNode) !== 1) return;
+            movePlayer(nodeIndex > gameState.playerNode ? 1 : -1);
+        });
         container.appendChild(el);
     });
+
+    requestAnimationFrame(renderMazeLinks);
 }
 
 function updateMazeProgress() {
-    mazeNodes.forEach(node => {
+    const mazeNodes = getMazeNodes();
+    mazeNodes.forEach((node, nodeIndex) => {
         const el = document.getElementById(`maze-node-${node.id}`);
         if (!el) return;
         el.classList.toggle("visited", gameState.visitedNodes.has(node.id));
+        const isAdjacent = Math.abs(nodeIndex - gameState.playerNode) === 1 && !gameState.questionOpen;
+        el.classList.toggle("is-clickable", isAdjacent);
+        el.classList.toggle("is-next-step", isAdjacent);
         if (node.type === "gate") {
             el.classList.toggle("unlocked", gameState.currentStage.completedGates.has(node.gateIndex));
         }
@@ -685,9 +982,12 @@ function updateMazeProgress() {
             el.classList.toggle("unlocked", gameState.currentStage.reviewPassed);
         }
     });
+
+    renderMazeLinks();
 }
 
 function updatePlayerPosition() {
+    const mazeNodes = getMazeNodes();
     const node = mazeNodes[gameState.playerNode];
     const player = document.getElementById("playerToken");
     player.style.left = `${node.x}%`;
@@ -760,9 +1060,11 @@ function resetLives() {
 }
 
 function updateControls() {
+    const mazeNodes = getMazeNodes();
     const disable = gameState.questionOpen;
     document.getElementById("btnBack").disabled = gameState.playerNode === 0 || disable;
     document.getElementById("btnForward").disabled = gameState.playerNode === mazeNodes.length - 1 || disable;
+    updateMazeProgress();
 }
 
 function updateStageInfo() {
@@ -791,6 +1093,7 @@ function updateStageVisuals(stage) {
 }
 
 function updateJourneyPanel() {
+    const mazeNodes = getMazeNodes();
     const currentNode = mazeNodes[gameState.playerNode];
     document.getElementById("currentStepLabel").textContent = currentNode.label;
 
@@ -1030,6 +1333,7 @@ function startReviewChallenge() {
 }
 
 function movePlayer(direction) {
+    const mazeNodes = getMazeNodes();
     if (gameState.questionOpen) return;
 
     const targetIndex = gameState.playerNode + direction;
@@ -1144,9 +1448,9 @@ function startGame() {
     createShadowCreatures();
     updateLighting();
     updateDarkness();
-    loadStage(0);
     closeQuestionModal();
-    showScreen("gameScreen");
+    renderWorldMap();
+    showScreen("worldMapScreen");
 }
 
 function nextStage() {
@@ -1157,7 +1461,9 @@ function nextStage() {
     }
 
     gameState.completedStages = nextIndex;
-    loadStage(nextIndex);
+    gameState.stageIndex = nextIndex;
+    renderWorldMap();
+    showScreen("worldMapScreen");
 }
 
 function showWinScreen() {
@@ -1187,13 +1493,7 @@ function showLoseScreen() {
 }
 
 function restartGame() {
-    document.body.style.background = "linear-gradient(145deg, #08101d 0%, #132033 35%, #20172d 70%, #090b10 100%)";
-    document.getElementById("lightOverlay").style.background = "transparent";
-    document.getElementById("lightOverlay").style.boxShadow = "none";
-    closeQuestionModal();
-    showScreen("startScreen");
-    createParticles();
-    createFireEmbers();
+    backToStart();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1201,6 +1501,11 @@ document.addEventListener("DOMContentLoaded", () => {
     createParticles();
     createFireEmbers();
     buildMaze();
+    renderWorldMap();
+    window.addEventListener("resize", () => {
+        renderWorldMapLinks();
+        renderMazeLinks();
+    });
     updatePlayerPosition();
     updateMazeProgress();
     updateStageInfo();
@@ -1211,9 +1516,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!gameActive) {
             if (event.key === "Enter") {
                 const startScreen = document.getElementById("startScreen");
+                const worldMapScreen = document.getElementById("worldMapScreen");
                 const winScreen = document.getElementById("winScreen");
                 const loseScreen = document.getElementById("loseScreen");
                 if (startScreen.classList.contains("active")) startGame();
+                else if (worldMapScreen.classList.contains("active")) openStageFromWorldMap(gameState.completedStages);
                 else if (winScreen.classList.contains("active") || loseScreen.classList.contains("active")) restartGame();
             }
             return;

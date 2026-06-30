@@ -1,30 +1,33 @@
-:root {
-    --cave-dark: #080b12;
-    --cave-deep: #111a27;
-    --cave-wall: #1a2434;
-    --cave-stone: #2b374b;
-    --cave-highlight: #465776;
-    --light-gold: #ffd66b;
-    --light-amber: #ffb347;
-    --light-warm: #ff8b38;
-    --light-divine: #fff7d6;
+﻿:root {
+    --cave-dark: #fff8ea;
+    --cave-deep: #f8edd5;
+    --cave-wall: #ead8b2;
+    --cave-stone: #d7bd8b;
+    --cave-highlight: #b8935d;
+    --light-gold: #f6d37a;
+    --light-amber: #efb85f;
+    --light-warm: #e79a4b;
+    --light-divine: #fff2cf;
     --shadow-purple: #241236;
     --shadow-dark: #08050e;
     --shadow-glow: #6d3ea1;
-    --text-primary: #f7efdf;
-    --text-secondary: #cdbda4;
-    --text-accent: #ffd66b;
-    --text-dim: #8f8274;
+    --text-primary: #4e3920;
+    --text-secondary: #7a6244;
+    --text-accent: #c79335;
+    --text-dim: #a0845e;
     --correct-green: #34d38d;
     --correct-glow: rgba(52, 211, 141, 0.16);
     --wrong-red: #ff6277;
     --wrong-glow: rgba(255, 98, 119, 0.15);
-    --glass-bg: rgba(255, 247, 214, 0.06);
-    --glass-border: rgba(255, 247, 214, 0.12);
-    --glass-hover: rgba(255, 247, 214, 0.1);
-    --font-title: 'Cinzel', serif;
-    --font-body: 'Philosopher', sans-serif;
-    --font-ui: 'Inter', sans-serif;
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(215, 184, 128, 0.24);
+    --glass-hover: rgba(255, 252, 245, 0.94);
+    --surface-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 243, 226, 0.98));
+    --surface-panel-strong: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 240, 220, 1));
+    --surface-shadow: 0 22px 52px rgba(137, 107, 57, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.86);
+    --font-title: 'Merriweather', serif;
+    --font-body: 'Be Vietnam Pro', sans-serif;
+    --font-ui: 'Be Vietnam Pro', sans-serif;
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -47,9 +50,13 @@ body {
     position: relative;
     color: var(--text-primary);
     font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background:
-        radial-gradient(circle at top, rgba(255, 214, 107, 0.1), transparent 28%),
-        linear-gradient(145deg, #08101d 0%, #132033 35%, #20172d 70%, #090b10 100%);
+        radial-gradient(circle at 82% 10%, rgba(255, 239, 184, 0.34) 0%, rgba(246, 211, 122, 0.16) 20%, transparent 40%),
+        radial-gradient(circle at 18% 24%, rgba(255, 250, 234, 0.18) 0%, transparent 28%),
+        linear-gradient(180deg, #fffaf0 0%, #f8efd9 22%, #f0dfbc 56%, #e4c891 100%);
 }
 
 #particles,
@@ -147,70 +154,126 @@ body {
 }
 
 #startScreen {
+    isolation: isolate;
     background:
-        radial-gradient(ellipse at 12% 18%, rgba(255, 214, 107, 0.12) 0%, transparent 35%),
-        radial-gradient(ellipse at 88% 16%, rgba(109, 62, 161, 0.16) 0%, transparent 32%),
-        radial-gradient(ellipse at 50% 100%, rgba(255, 139, 56, 0.08) 0%, transparent 55%);
+        radial-gradient(circle at 84% 24%, rgba(255, 248, 220, 0.56) 0%, rgba(246, 211, 122, 0.24) 20%, transparent 46%),
+        linear-gradient(90deg, #fffdf8 0%, #faf2df 38%, #edd7ae 76%, #ddb26b 100%);
+}
+
+#worldMapScreen {
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 82% 16%, rgba(255, 244, 201, 0.54) 0%, rgba(244, 206, 116, 0.2) 18%, transparent 40%),
+        radial-gradient(circle at 18% 20%, rgba(255, 250, 236, 0.42) 0%, transparent 28%),
+        linear-gradient(180deg, #fffdf7 0%, #fbf1dc 34%, #f2dfb8 72%, #e7c98f 100%);
+}
+
+#worldMapScreen::before,
+#worldMapScreen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+#worldMapScreen::before {
+    background:
+        radial-gradient(circle at 24% 74%, rgba(255, 255, 255, 0.26), transparent 18%),
+        radial-gradient(circle at 78% 68%, rgba(255, 255, 255, 0.18), transparent 20%);
+    opacity: 0.9;
+}
+
+#worldMapScreen::after {
+    background:
+        linear-gradient(90deg, rgba(192, 152, 84, 0.12) 0%, transparent 22%, transparent 78%, rgba(192, 152, 84, 0.12) 100%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 18%, rgba(180, 137, 62, 0.08) 100%);
+}
+
+#startScreen::before,
+#startScreen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+#startScreen::before {
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 92% 24%, rgba(255, 252, 234, 0.5) 0%, rgba(255, 228, 171, 0.22) 18%, transparent 36%),
+        linear-gradient(234deg, rgba(255, 237, 198, 0.18) 18%, transparent 30%);
+    mix-blend-mode: screen;
+    opacity: 0.92;
+}
+
+#startScreen::after {
+    z-index: 0;
+    background:
+        linear-gradient(90deg, rgba(123, 94, 53, 0.18) 0%, rgba(173, 141, 92, 0.08) 34%, transparent 74%),
+        linear-gradient(180deg, transparent 0%, rgba(142, 112, 69, 0.06) 42%, rgba(121, 89, 44, 0.16) 100%);
 }
 
 .bg-orbs {
     position: absolute;
     inset: 0;
     overflow: hidden;
+    z-index: 1;
+    opacity: 0.7;
 }
 
 .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(90px);
-    animation: orb-float 12s ease-in-out infinite;
+    filter: blur(120px);
+    animation: orb-float 18s ease-in-out infinite;
 }
 
 .orb-1 {
-    top: -8%;
-    right: -6%;
+    top: 8%;
+    right: -2%;
     width: 360px;
     height: 360px;
-    background: radial-gradient(circle, rgba(255, 179, 71, 0.18), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 229, 168, 0.18), transparent 72%);
 }
 
 .orb-2 {
-    left: -6%;
-    bottom: -10%;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(109, 62, 161, 0.2), transparent 70%);
-    animation-duration: 14s;
+    left: -12%;
+    bottom: 18%;
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(95, 120, 156, 0.16), transparent 72%);
+    animation-duration: 20s;
     animation-delay: -3s;
 }
 
 .orb-3 {
-    top: 35%;
-    left: 45%;
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(circle, rgba(255, 214, 107, 0.12), transparent 70%);
-    animation-duration: 16s;
+    top: 64%;
+    left: 74%;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(255, 214, 140, 0.08), transparent 74%);
+    animation-duration: 22s;
     animation-delay: -5s;
 }
 
 .start-layout {
     position: relative;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    gap: 56px;
-    width: min(1240px, 100%);
-    padding: 34px;
-    border: 1px solid rgba(255, 247, 214, 0.1);
-    border-radius: 32px;
-    background: linear-gradient(180deg, rgba(10, 14, 22, 0.78), rgba(12, 11, 18, 0.92));
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(24px);
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    align-items: start;
+    gap: 34px;
+    width: min(1120px, 100%);
+    padding: 32px;
+    border: 1px solid rgba(210, 180, 126, 0.28);
+    border-radius: 28px;
+    background:
+        linear-gradient(180deg, rgba(251, 243, 225, 0.98), rgba(236, 219, 184, 0.98));
+    box-shadow: 0 22px 54px rgba(137, 107, 57, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(18px);
 }
 
 .hero-image-section {
-    flex: 0 0 390px;
     text-align: center;
     animation: fadeInLeft 1.1s ease;
 }
@@ -218,9 +281,9 @@ body {
 .hero-image-wrapper {
     position: relative;
     overflow: hidden;
-    border-radius: 28px;
-    border: 1px solid rgba(255, 214, 107, 0.14);
-    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5), 0 0 90px rgba(255, 179, 71, 0.12);
+    border-radius: 24px;
+    border: 1px solid rgba(224, 196, 145, 0.22);
+    box-shadow: 0 18px 40px rgba(115, 86, 43, 0.2);
     animation: hero-float 5s ease-in-out infinite;
 }
 
@@ -231,14 +294,14 @@ body {
     width: 200%;
     height: 200%;
     z-index: 2;
-    background: radial-gradient(circle at 60% 30%, rgba(255, 214, 107, 0.18) 0%, transparent 50%);
+    background: radial-gradient(circle at 84% 22%, rgba(255, 249, 228, 0.22) 0%, rgba(246, 211, 122, 0.14) 24%, transparent 56%);
     animation: hero-glow-pulse 4s ease-in-out infinite;
 }
 
 .hero-image {
     display: block;
     width: 100%;
-    height: 520px;
+    height: 470px;
     object-fit: cover;
     transition: transform 0.6s ease;
 }
@@ -251,14 +314,16 @@ body {
     position: absolute;
     inset: auto 0 0 0;
     height: 45%;
-    background: linear-gradient(to top, rgba(8, 11, 18, 0.82), transparent);
+    background: linear-gradient(to top, rgba(118, 88, 46, 0.34), transparent);
 }
 
 .hero-caption {
-    margin-top: 14px;
-    color: rgba(247, 239, 223, 0.68);
+    margin-top: 12px;
+    color: rgba(92, 71, 42, 0.98);
     font-style: italic;
-    letter-spacing: 0.04em;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
 }
 
 .start-content {
@@ -281,97 +346,109 @@ body {
 
 .intro-badge {
     display: inline-flex;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     padding: 8px 14px;
-    border: 1px solid rgba(255, 214, 107, 0.18);
+    border: 1px solid rgba(201, 164, 98, 0.34);
     border-radius: 999px;
-    background: rgba(255, 214, 107, 0.1);
-    color: var(--text-accent);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    background: rgba(246, 225, 182, 0.92);
+    color: #85550f;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
 .main-title {
     margin-bottom: 10px;
     font-family: var(--font-title);
+    font-weight: 900;
 }
 
 .title-line {
     display: block;
-    font-size: 1.65rem;
-    line-height: 1.35;
-    letter-spacing: 0.18em;
+    font-size: 1.28rem;
+    line-height: 1.24;
+    letter-spacing: 0.05em;
+    color: #5f4322;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
 .title-line.accent {
-    font-size: 2.85rem;
+    display: inline-block;
+    margin: 6px 0 10px;
+    padding: 0.08em 0.12em 0.12em;
+    line-height: 1.08;
+    font-size: 2.75rem;
     font-weight: 900;
-    letter-spacing: 0.22em;
-    background: linear-gradient(135deg, var(--light-gold), var(--light-divine), var(--light-warm));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 22px rgba(255, 214, 107, 0.28));
-    animation: title-shimmer 3s ease-in-out infinite;
+    letter-spacing: 0.06em;
+    color: #c8861e;
+    background: none;
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: currentColor;
+    background-clip: border-box;
+    text-shadow: 0 1px 0 rgba(255, 248, 227, 0.55), 0 3px 10px rgba(184, 121, 28, 0.14);
+    filter: none;
+    animation: none;
 }
 
 .subtitle {
-    margin-bottom: 18px;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 20px;
+    color: rgba(86, 65, 36, 0.98);
+    font-size: 0.96rem;
+    font-weight: 500;
+    line-height: 1.55;
 }
 
 .start-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 26px;
+    margin-bottom: 22px;
 }
 
 .start-meta span {
-    padding: 9px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 13px;
+    border: 1px solid rgba(209, 179, 127, 0.28);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.045);
-    color: var(--text-secondary);
+    background: rgba(248, 238, 217, 0.96);
+    color: rgba(87, 68, 42, 0.98);
     font-family: var(--font-ui);
-    font-size: 0.8rem;
+    font-size: 0.74rem;
+    font-weight: 600;
 }
 
 .story-box {
-    margin-bottom: 24px;
-    padding: 24px 28px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(20px);
+    margin-bottom: 22px;
+    padding: 22px 24px;
+    border: 1px solid rgba(209, 179, 127, 0.28);
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(255, 250, 241, 0.98), rgba(238, 222, 188, 0.94));
+    backdrop-filter: blur(16px);
 }
 
 .story-text {
     margin-bottom: 14px;
-    color: var(--text-secondary);
-    font-size: 0.98rem;
-    line-height: 1.75;
+    color: rgba(88, 69, 43, 0.98);
+    font-size: 0.92rem;
+    line-height: 1.65;
 }
 
 .story-text strong {
-    color: var(--text-accent);
+    color: #975f12;
 }
 
 .warning-text {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 16px;
-    border: 1px solid rgba(255, 98, 119, 0.2);
-    border-radius: 14px;
-    background: rgba(255, 98, 119, 0.08);
-    color: #ff95a4;
+    padding: 10px 14px;
+    border: 1px solid rgba(237, 151, 164, 0.28);
+    border-radius: 12px;
+    background: rgba(255, 229, 232, 0.88);
+    color: #cf6274;
     font-family: var(--font-ui);
-    font-size: 0.86rem;
+    font-size: 0.8rem;
 }
 
 .warning-icon {
@@ -381,26 +458,26 @@ body {
 .game-features {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    margin-bottom: 28px;
+    gap: 12px;
+    margin-bottom: 26px;
 }
 
 .feature-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 15px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.04);
+    padding: 14px 14px;
+    border: 1px solid rgba(209, 179, 127, 0.24);
+    border-radius: 16px;
+    background: rgba(248, 239, 220, 0.9);
     transition: var(--transition-smooth);
 }
 
 .feature-item:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 214, 107, 0.18);
-    background: rgba(255, 214, 107, 0.07);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+    border-color: rgba(201, 164, 98, 0.32);
+    background: rgba(242, 228, 196, 0.98);
+    box-shadow: 0 14px 30px rgba(137, 107, 57, 0.14);
 }
 
 .feature-icon {
@@ -410,14 +487,15 @@ body {
 
 .feature-item strong {
     display: block;
-    margin-bottom: 2px;
-    font-size: 0.82rem;
+    margin-bottom: 4px;
+    font-size: 0.84rem;
     font-family: var(--font-ui);
+    color: rgba(73, 54, 30, 0.98);
 }
 
 .feature-item p {
-    color: var(--text-dim);
-    font-size: 0.73rem;
+    color: rgba(118, 96, 62, 0.98);
+    font-size: 0.72rem;
     font-family: var(--font-ui);
 }
 
@@ -431,16 +509,17 @@ body {
 .btn-primary {
     position: relative;
     overflow: hidden;
-    padding: 18px 40px;
+    min-width: 260px;
+    padding: 15px 28px;
     border: 0;
     border-radius: 999px;
-    color: #1e1608;
-    background: linear-gradient(135deg, var(--light-gold), var(--light-amber));
-    box-shadow: 0 10px 30px rgba(255, 214, 107, 0.28), 0 0 50px rgba(255, 214, 107, 0.12);
+    color: #5d3f10;
+    background: linear-gradient(135deg, #fff9ef, #efd6a0);
+    box-shadow: 0 12px 28px rgba(186, 151, 87, 0.26);
     font-family: var(--font-title);
-    font-size: 1rem;
+    font-size: 0.96rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     animation: btn-pulse 3s ease-in-out infinite;
 }
@@ -448,7 +527,7 @@ body {
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.03);
     animation: none;
-    box-shadow: 0 16px 38px rgba(255, 214, 107, 0.34), 0 0 70px rgba(255, 214, 107, 0.18);
+    box-shadow: 0 16px 34px rgba(186, 151, 87, 0.3);
 }
 
 .btn-glow {
@@ -483,9 +562,9 @@ body {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, transparent 0%, rgba(8, 11, 18, 0.3) 100%),
-        radial-gradient(ellipse at 18% 82%, rgba(39, 50, 73, 0.36) 0%, transparent 50%),
-        radial-gradient(ellipse at 82% 80%, rgba(39, 50, 73, 0.36) 0%, transparent 50%);
+        linear-gradient(180deg, transparent 0%, rgba(8, 12, 20, 0.38) 100%),
+        radial-gradient(ellipse at 18% 82%, rgba(52, 67, 96, 0.34) 0%, transparent 50%),
+        radial-gradient(ellipse at 82% 80%, rgba(69, 53, 42, 0.24) 0%, transparent 50%);
 }
 
 .cave-stalactites {
@@ -493,7 +572,7 @@ body {
     top: 0;
     width: 100%;
     height: 120px;
-    background: linear-gradient(180deg, rgba(8, 11, 18, 0.92), transparent 100%);
+    background: linear-gradient(180deg, rgba(11, 16, 25, 0.9), transparent 100%);
 }
 
 .light-source {
@@ -517,12 +596,12 @@ body {
     grid-template-columns: 1fr minmax(260px, 360px) 1fr;
     gap: 16px;
     padding: 18px 24px;
-    background: linear-gradient(180deg, rgba(7, 9, 14, 0.88) 0%, rgba(7, 9, 14, 0.32) 80%, transparent 100%);
+    background: linear-gradient(180deg, rgba(10, 15, 24, 0.88) 0%, rgba(13, 18, 27, 0.34) 80%, transparent 100%);
 }
 
 .hud-item {
     padding: 12px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 238, 199, 0.08);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(18px);
@@ -607,7 +686,7 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .progress-bar-container {
@@ -646,10 +725,10 @@ body {
 
 .maze-stage,
 .panel-card {
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 233, 192, 0.08);
     border-radius: 28px;
-    background: linear-gradient(180deg, rgba(9, 12, 19, 0.9), rgba(10, 11, 18, 0.76));
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    background: var(--surface-panel);
+    box-shadow: var(--surface-shadow);
     backdrop-filter: blur(24px);
 }
 
@@ -697,6 +776,433 @@ body {
     gap: 8px;
 }
 
+.world-screen-shell {
+    width: min(1240px, 100%);
+    display: grid;
+    gap: 24px;
+}
+
+.world-screen-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.world-stage {
+    padding: 26px;
+    border: 1px solid rgba(227, 190, 111, 0.28);
+    border-radius: 28px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 231, 0.92)),
+        radial-gradient(circle at top, rgba(255, 222, 145, 0.24), transparent 34%);
+    box-shadow:
+        0 24px 54px rgba(152, 113, 28, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+}
+
+.world-stage-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.world-stage-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.world-home-button {
+    min-height: 40px;
+    padding: 9px 16px;
+    border-radius: 999px;
+}
+
+.world-note-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(227, 190, 111, 0.2);
+    background: rgba(255, 251, 240, 0.88);
+    color: #8b6220;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.world-note-pill.current {
+    border-color: rgba(228, 175, 58, 0.38);
+    background: linear-gradient(180deg, rgba(255, 233, 178, 0.88), rgba(255, 244, 214, 0.92));
+}
+
+.world-map {
+    position: relative;
+    min-height: 580px;
+    overflow: hidden;
+    border-radius: 26px;
+    border: 1px solid rgba(225, 189, 112, 0.26);
+    background:
+        radial-gradient(circle at 18% 18%, rgba(255, 245, 214, 0.92), transparent 18%),
+        radial-gradient(circle at 82% 14%, rgba(255, 232, 174, 0.7), transparent 20%),
+        radial-gradient(circle at 24% 74%, rgba(129, 203, 255, 0.28), transparent 22%),
+        radial-gradient(circle at 76% 68%, rgba(109, 188, 244, 0.22), transparent 20%),
+        linear-gradient(180deg, rgba(243, 234, 213, 0.96) 0%, rgba(189, 224, 246, 0.9) 44%, rgba(104, 182, 229, 0.86) 100%),
+        linear-gradient(135deg, #f8efd8 0%, #dff1fb 46%, #8fd2f3 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.48),
+        inset 0 -80px 120px rgba(73, 146, 208, 0.18),
+        0 24px 60px rgba(120, 88, 25, 0.12);
+}
+
+.world-map::before,
+.world-map::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.world-map::before {
+    background:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.75), transparent 2.6%),
+        radial-gradient(circle at 26% 14%, rgba(255, 255, 255, 0.55), transparent 2.2%),
+        radial-gradient(circle at 42% 24%, rgba(255, 252, 239, 0.6), transparent 2.8%),
+        radial-gradient(circle at 68% 18%, rgba(255, 255, 255, 0.62), transparent 2.4%),
+        radial-gradient(circle at 84% 22%, rgba(255, 249, 230, 0.56), transparent 2.6%),
+        radial-gradient(circle at 58% 10%, rgba(255, 255, 255, 0.5), transparent 2%);
+    opacity: 0.7;
+}
+
+.world-map::after {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent 18%),
+        radial-gradient(ellipse at 50% 102%, rgba(255, 255, 255, 0.2), transparent 42%),
+        linear-gradient(0deg, rgba(40, 126, 184, 0.14), transparent 34%);
+}
+
+.world-stars,
+.world-map-nodes,
+.world-links-layer {
+    position: absolute;
+    inset: 0;
+}
+
+.world-links-layer {
+    z-index: 1;
+    overflow: visible;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+.world-link-glow,
+.world-link-line,
+.world-link-dots {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.world-link-glow {
+    stroke: rgba(223, 242, 255, 0.62);
+    stroke-width: 16;
+    filter: blur(10px);
+}
+
+.world-link-line {
+    stroke: rgba(247, 251, 255, 0.92);
+    stroke-width: 5.5;
+}
+
+.world-link-dots {
+    stroke: rgba(163, 205, 235, 0.9);
+    stroke-width: 1.8;
+    opacity: 0.58;
+    stroke-dasharray: 1 18;
+}
+
+.world-node {
+    position: absolute;
+    width: 148px;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.world-node.is-clickable {
+    cursor: pointer;
+}
+
+.world-node-visual {
+    position: relative;
+    width: 136px;
+    height: 136px;
+    display: grid;
+    place-items: center;
+    display: grid;
+    transition: transform 0.25s ease;
+    overflow: visible;
+}
+
+.world-node.is-clickable:hover .world-node-visual {
+    transform: translateY(-6px) scale(1.04);
+}
+
+.world-node-ring {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background:
+        radial-gradient(ellipse at center, rgba(255, 221, 146, 0.34), rgba(255, 255, 255, 0.08) 56%, transparent 76%);
+    filter: blur(9px);
+    z-index: 0;
+}
+
+.world-island-scene {
+    position: relative;
+    width: 122px;
+    height: 122px;
+    z-index: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(233, 184, 74, 0.9);
+    background:
+        radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.36), transparent 32%),
+        var(--world-island-image) center center / cover no-repeat;
+    box-shadow:
+        0 20px 34px rgba(113, 78, 18, 0.18),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+    filter: none;
+}
+
+.world-node-halo {
+    position: absolute;
+    inset: 12px;
+    z-index: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 233, 182, 0.46), transparent 72%);
+    filter: blur(10px);
+}
+
+.world-island-scene > * {
+    display: none;
+}
+
+.world-node-number {
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #fff9ec, #f3d899);
+    color: #8a5815;
+    font-family: var(--font-title);
+    font-size: 0.96rem;
+    font-weight: 900;
+    border: 1px solid rgba(226, 179, 63, 0.56);
+    box-shadow: 0 10px 20px rgba(174, 130, 39, 0.18);
+}
+
+.world-node-lock {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-items: center;
+    font-size: 1.55rem;
+    color: rgba(113, 89, 45, 0.72);
+}
+
+.world-node-card {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    width: 176px;
+    padding: 13px 13px 11px;
+    transform: translateX(-50%);
+    border-radius: 22px;
+    border: 1px solid rgba(230, 189, 99, 0.24);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 247, 228, 0.94));
+    box-shadow:
+        0 16px 30px rgba(133, 96, 26, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    text-align: left;
+    backdrop-filter: blur(10px);
+}
+
+.world-node-kicker {
+    margin-bottom: 6px;
+    color: #b47a20;
+    font-family: var(--font-ui);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.world-node-title {
+    color: #523914;
+    font-family: var(--font-title);
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.world-node-meta {
+    margin-top: 8px;
+    color: #93651d;
+    font-family: var(--font-ui);
+    font-size: 0.74rem;
+    font-weight: 800;
+}
+
+.world-node-chip {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(255, 248, 227, 0.92);
+    border: 1px solid rgba(230, 189, 99, 0.24);
+    color: #8c601c;
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.world-node.is-complete .world-node-visual {
+    filter: saturate(1.08);
+}
+
+.world-node.is-current .world-node-card {
+    border-color: rgba(232, 177, 59, 0.38);
+    box-shadow:
+        0 18px 34px rgba(173, 121, 21, 0.14),
+        0 0 0 3px rgba(255, 224, 155, 0.36);
+}
+
+.world-node.is-current .world-node-ring {
+    background: radial-gradient(ellipse at center, rgba(255, 202, 77, 0.42), transparent 72%);
+}
+
+.world-node.is-current .world-node-chip {
+    background: linear-gradient(180deg, rgba(255, 229, 168, 0.92), rgba(255, 243, 210, 0.96));
+    border-color: rgba(232, 177, 59, 0.42);
+}
+
+.world-node.is-locked {
+    opacity: 0.68;
+}
+
+.world-node.is-locked .world-node-visual {
+    filter: grayscale(0.2) saturate(0.72) brightness(0.94);
+}
+
+.world-node.is-locked .world-node-lock {
+    display: grid;
+}
+
+.world-node.is-locked .world-node-card {
+    background: linear-gradient(180deg, rgba(246, 241, 230, 0.92), rgba(239, 233, 220, 0.92));
+}
+
+.world-node.is-complete .world-node-chip {
+    background: linear-gradient(180deg, rgba(225, 245, 226, 0.92), rgba(243, 252, 231, 0.96));
+    border-color: rgba(131, 181, 96, 0.34);
+    color: #4d7c34;
+}
+
+.world-node[data-theme="temple"] .world-island-scene {
+    transform: rotate(-2deg) scale(1);
+}
+
+.world-node[data-theme="tower"] .world-island-scene {
+    transform: rotate(1deg) scale(1);
+}
+
+.world-node[data-theme="village"] .world-island-scene {
+    transform: rotate(-2deg) scale(1.01);
+}
+
+.world-node[data-theme="sanctuary"] .world-island-scene {
+    transform: rotate(1deg) scale(0.99);
+}
+
+.world-node[data-side="left"] .world-node-card {
+    left: 0;
+    transform: none;
+}
+
+.world-node[data-side="right"] .world-node-card {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+.maze-tools {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.maze-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-return-home {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 132px;
+    padding: 11px 16px;
+    border: 1px solid rgba(255, 214, 107, 0.28);
+    border-radius: 999px;
+    color: #fff4d0;
+    background:
+        linear-gradient(135deg, rgba(255, 214, 107, 0.16), rgba(255, 255, 255, 0.035)),
+        rgba(9, 12, 19, 0.76);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    font-family: var(--font-ui);
+    font-size: 0.86rem;
+    font-weight: 800;
+    transition: var(--transition-bounce);
+}
+
+.btn-return-home:hover {
+    transform: translateY(-3px);
+}
+
+.return-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .legend-dot {
     display: inline-block;
     width: 12px;
@@ -724,9 +1230,9 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 24px;
     background:
-        linear-gradient(180deg, rgba(255, 247, 228, 0.06), rgba(12, 14, 22, 0.18)),
-        url("cave-stage-bg.png") center center / cover no-repeat,
-        linear-gradient(180deg, rgba(95, 132, 178, 0.42) 0%, rgba(41, 58, 84, 0.55) 26%, rgba(18, 24, 35, 0.96) 100%);
+        linear-gradient(180deg, rgba(255, 247, 223, 0.08), rgba(27, 22, 16, 0.18)),
+        url("images/maze-adventure-bg.png") center center / cover no-repeat,
+        linear-gradient(180deg, rgba(85, 140, 186, 0.18) 0%, rgba(78, 63, 36, 0.26) 28%, rgba(30, 23, 15, 0.54) 100%);
 }
 
 .maze-map::before,
@@ -739,19 +1245,19 @@ body {
 
 .maze-map::before {
     background:
-        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.08), transparent 12%),
-        radial-gradient(circle at 82% 74%, rgba(255, 255, 255, 0.06), transparent 14%),
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.05), transparent 12%),
+        radial-gradient(circle at 82% 74%, rgba(255, 255, 255, 0.04), transparent 14%),
         radial-gradient(circle at 50% 48%, rgba(255, 214, 107, 0.06), transparent 18%),
-        linear-gradient(180deg, transparent 0 54%, rgba(213, 176, 104, 0.09) 54% 68%, rgba(0, 0, 0, 0) 68%),
-        radial-gradient(ellipse at 10% 100%, rgba(58, 43, 29, 0.45) 0%, transparent 38%),
-        radial-gradient(ellipse at 92% 100%, rgba(58, 43, 29, 0.42) 0%, transparent 35%);
+        linear-gradient(180deg, transparent 0 56%, rgba(243, 210, 139, 0.08) 56% 68%, rgba(0, 0, 0, 0) 68%),
+        radial-gradient(ellipse at 10% 100%, rgba(58, 43, 29, 0.24) 0%, transparent 38%),
+        radial-gradient(ellipse at 92% 100%, rgba(58, 43, 29, 0.22) 0%, transparent 35%);
 }
 
 .maze-map::after {
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 16%),
-        linear-gradient(0deg, rgba(10, 12, 18, 0.42), transparent 22%);
-    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.28);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 16%),
+        linear-gradient(0deg, rgba(17, 16, 14, 0.28), transparent 22%);
+    box-shadow: inset 0 0 84px rgba(0, 0, 0, 0.16);
 }
 
 .stage-sky,
@@ -782,7 +1288,7 @@ body {
     width: 55%;
     height: 38%;
     transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(255, 228, 152, 0.08), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 228, 152, 0.12), transparent 70%);
     filter: blur(24px);
 }
 
@@ -945,93 +1451,52 @@ body {
     transform: scale(0.98);
 }
 
-.maze-path {
-    position: absolute;
-    background:
-        linear-gradient(180deg, rgba(255, 248, 224, 0.6), rgba(209, 179, 114, 0.66)),
-        repeating-linear-gradient(90deg, rgba(122, 93, 53, 0.1) 0 16px, rgba(255, 255, 255, 0) 16px 32px);
-    border-radius: 999px;
-    box-shadow:
-        0 0 12px rgba(255, 214, 107, 0.08),
-        inset 0 0 0 1px rgba(255, 249, 230, 0.16),
-        inset 0 -4px 10px rgba(126, 94, 43, 0.12),
-        0 8px 18px rgba(0, 0, 0, 0.08);
-    opacity: 0.72;
-}
-
-.maze-path-a {
-    top: 12%;
-    left: 10%;
-    width: 19%;
-    height: 18px;
-}
-
-.maze-path-b {
-    top: 12%;
-    left: 28%;
-    width: 18px;
-    height: 18%;
-}
-
-.maze-path-c {
-    top: 29%;
-    left: 28%;
-    width: 24%;
-    height: 18px;
-}
-
-.maze-path-d {
-    top: 29%;
-    left: 51%;
-    width: 18px;
-    height: 19%;
-}
-
-.maze-path-e {
-    top: 47%;
-    left: 31%;
-    width: 21%;
-    height: 18px;
-}
-
-.maze-path-f {
-    top: 47%;
-    left: 30%;
-    width: 18px;
-    height: 19%;
-}
-
-.maze-path-g {
-    top: 65%;
-    left: 30%;
-    width: 28%;
-    height: 18px;
-}
-
-.maze-path-h {
-    top: 65%;
-    left: 57%;
-    width: 18px;
-    height: 16%;
-}
-
-.maze-path-i {
-    top: 80%;
-    left: 57%;
-    width: 22%;
-    height: 18px;
-}
-
-.maze-path-j {
-    top: 80%;
-    left: 78%;
-    width: 18px;
-    height: 9%;
-}
-
+.maze-links-layer,
 #mazeNodes {
     position: absolute;
     inset: 0;
+}
+
+.maze-links-layer {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.maze-link-shadow,
+.maze-link-track,
+.maze-link-progress {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.maze-link-shadow {
+    stroke: rgba(88, 57, 22, 0.22);
+    stroke-width: 26;
+    filter: blur(7px);
+}
+
+.maze-link-track {
+    stroke: rgba(255, 244, 220, 0.7);
+    stroke-width: 14;
+}
+
+.maze-link-progress {
+    stroke: rgba(244, 185, 73, 0.92);
+    stroke-width: 8;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.maze-link-progress.is-active {
+    opacity: 1;
+}
+
+#mazeNodes {
+    z-index: 4;
 }
 
 .maze-node {
@@ -1042,6 +1507,21 @@ body {
     margin-top: -56px;
     transition: var(--transition-smooth);
     z-index: 4;
+}
+
+.maze-node.is-clickable {
+    cursor: pointer;
+}
+
+.maze-node.is-clickable:hover {
+    transform: translateY(-4px) scale(1.03);
+}
+
+.maze-node.is-next-step .node-label {
+    opacity: 1;
+    background: rgba(255, 250, 241, 0.92);
+    color: #6e4b1f;
+    border-color: rgba(214, 170, 96, 0.34);
 }
 
 .maze-node::before,
@@ -1094,13 +1574,13 @@ body {
     bottom: -28px;
     transform: translateX(-50%);
     padding: 4px 8px;
-    border: 1px solid rgba(255, 247, 214, 0.16);
+    border: 1px solid rgba(255, 247, 214, 0.22);
     border-radius: 999px;
-    background: rgba(14, 18, 26, 0.58);
-    color: rgba(247, 239, 223, 0.82);
+    background: rgba(58, 44, 27, 0.82);
+    color: rgba(255, 248, 236, 0.96);
     font-family: var(--font-ui);
     font-size: 0.62rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
     white-space: nowrap;
     opacity: 0;
@@ -1241,6 +1721,209 @@ body {
     color: rgba(61, 50, 34, 0.9);
 }
 
+.maze-map {
+    min-height: 560px;
+    border: 1px solid rgba(226, 206, 165, 0.5);
+    background:
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.maze-map::before,
+.maze-map::after,
+.stage-sky,
+.stage-haze,
+.maze-glow,
+.stage-landmark,
+.stage-people,
+.exit-portal {
+    display: none;
+}
+
+.maze-links-layer {
+    z-index: 1;
+}
+
+.maze-link-shadow {
+    stroke: rgba(187, 145, 70, 0.12);
+    stroke-width: 18;
+    filter: blur(4px);
+}
+
+.maze-link-track {
+    stroke: rgba(224, 188, 123, 0.52);
+    stroke-width: 6;
+    stroke-dasharray: 6 12;
+}
+
+.maze-link-progress {
+    stroke: rgba(214, 144, 35, 0.92);
+    stroke-width: 4;
+}
+
+.maze-node {
+    width: 112px;
+    height: 132px;
+    margin-left: 0;
+    margin-top: 0;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+.maze-node::before,
+.maze-node::after {
+    content: none;
+}
+
+.maze-node:hover,
+.maze-node.visited {
+    transform: translate(-50%, -53%);
+}
+
+.maze-node.is-clickable:hover {
+    transform: translate(-50%, -55%) scale(1.03);
+}
+
+.maze-node-visual {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+}
+
+.maze-node-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 223, 144, 0.32), transparent 68%);
+    filter: blur(4px);
+}
+
+.maze-node-scene {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid rgba(233, 196, 120, 0.95);
+    background:
+        radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.26), transparent 34%),
+        var(--maze-node-image) center center / cover no-repeat;
+    box-shadow:
+        0 12px 22px rgba(104, 76, 34, 0.2),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+}
+
+.maze-node .node-marker {
+    top: auto;
+    left: 50%;
+    bottom: -4px;
+    width: 32px;
+    height: 32px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(180deg, #8a5b19, #6c4410);
+    color: #fff8ea;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 14px rgba(94, 62, 15, 0.22);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0;
+}
+
+.maze-node .node-label {
+    left: 50%;
+    bottom: -32px;
+    transform: translateX(-50%);
+    padding: 6px 10px;
+    border: 1px solid rgba(222, 190, 133, 0.45);
+    background: rgba(255, 252, 245, 0.95);
+    color: #6a4c23;
+    font-size: 0.68rem;
+    font-weight: 800;
+    box-shadow: 0 8px 18px rgba(122, 88, 41, 0.12);
+}
+
+.maze-node.is-next-step .node-label,
+.maze-node:hover .node-label,
+.maze-node.visited .node-label,
+.maze-node.gate .node-label,
+.maze-node.exit-node .node-label,
+.review-node .node-label {
+    opacity: 1;
+}
+
+.maze-node.gate .maze-node-scene {
+    border-color: rgba(243, 162, 95, 0.98);
+}
+
+.maze-node.gate .node-marker {
+    background: linear-gradient(180deg, #ee8a43, #b95d1d);
+}
+
+.maze-node.gate.unlocked .maze-node-scene {
+    border-color: rgba(88, 197, 143, 0.98);
+    box-shadow:
+        0 12px 22px rgba(59, 118, 91, 0.24),
+        0 0 0 5px rgba(88, 197, 143, 0.14),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+}
+
+.maze-node.gate.unlocked .node-marker {
+    background: linear-gradient(180deg, #6be2a9, #2e9f70);
+}
+
+.review-node .maze-node-scene {
+    border-color: rgba(139, 167, 233, 0.96);
+}
+
+.review-node .node-marker {
+    background: linear-gradient(180deg, #7d92de, #4f63b4);
+}
+
+.maze-node.exit-node .maze-node-scene {
+    border-color: rgba(248, 206, 96, 0.98);
+    box-shadow:
+        0 12px 28px rgba(167, 124, 31, 0.24),
+        0 0 0 6px rgba(248, 206, 96, 0.16),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.28);
+}
+
+.maze-node.exit-node .node-marker {
+    background: linear-gradient(180deg, #f1c85e, #c68c1b);
+}
+
+.start-node .maze-node-scene {
+    border-color: rgba(129, 177, 236, 0.96);
+}
+
+.start-node .node-marker {
+    background: linear-gradient(180deg, #719ee3, #3d69af);
+}
+
+.maze-map.theme-gate .maze-node-scene {
+    filter: saturate(1.04) hue-rotate(-6deg);
+}
+
+.maze-map.theme-house .maze-node-scene {
+    filter: saturate(1.08) hue-rotate(8deg) brightness(1.01);
+}
+
+.maze-map.theme-temple .maze-node-scene {
+    filter: saturate(0.96) hue-rotate(18deg) brightness(1.04);
+}
+
+.maze-map.theme-tower .maze-node-scene {
+    filter: saturate(0.98) hue-rotate(34deg) brightness(0.99);
+}
+
+.maze-map.theme-village .maze-node-scene {
+    filter: saturate(1.1) hue-rotate(-14deg) brightness(1.01);
+}
+
+.maze-map.theme-sanctuary .maze-node-scene {
+    filter: saturate(1.02) hue-rotate(22deg) brightness(1.03);
+}
+
 .player-token {
     position: absolute;
     top: 12%;
@@ -1340,57 +2023,37 @@ body {
 }
 
 .exit-portal {
-    position: absolute;
-    right: 7%;
-    bottom: 4%;
-    padding: 12px 20px;
-    border: 1px solid rgba(255, 239, 184, 0.34);
-    border-radius: 999px;
-    background: rgba(255, 247, 214, 0.24);
-    color: #fff3c0;
-    font-family: var(--font-ui);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    backdrop-filter: blur(10px);
-    z-index: 7;
+    display: none;
 }
 
 .maze-map.theme-gate {
     background:
-        linear-gradient(180deg, rgba(255, 208, 122, 0.06), rgba(16, 18, 24, 0.14)),
-        url("cave-stage-bg.png") center center / cover no-repeat;
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
 }
 
 .maze-map.theme-house {
     background:
-        linear-gradient(180deg, rgba(255, 229, 178, 0.05), rgba(18, 21, 26, 0.14)),
-        url("cave-stage-bg.png") center center / cover no-repeat;
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
 }
 
 .maze-map.theme-temple {
     background:
-        linear-gradient(180deg, rgba(240, 236, 212, 0.05), rgba(21, 21, 30, 0.18)),
-        url("cave-stage-bg.png") center center / cover no-repeat;
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
 }
 
 .maze-map.theme-tower {
     background:
-        linear-gradient(180deg, rgba(214, 236, 255, 0.05), rgba(17, 26, 39, 0.18)),
-        url("cave-stage-bg.png") center center / cover no-repeat;
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
 }
 
 .maze-map.theme-village {
     background:
-        linear-gradient(180deg, rgba(255, 232, 170, 0.05), rgba(26, 35, 36, 0.16)),
-        url("cave-stage-bg.png") center center / cover no-repeat;
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
 }
 
 .maze-map.theme-sanctuary {
     background:
-        linear-gradient(180deg, rgba(255, 245, 206, 0.05), rgba(23, 24, 52, 0.16)),
-        url("cave-stage-bg.png") center center / cover no-repeat;
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 219, 0.9), rgba(255, 250, 242, 0.98) 48%, rgba(247, 240, 230, 0.98) 100%);
 }
 
 
@@ -1435,7 +2098,7 @@ body {
 
 .btn-control:hover:not(:disabled) {
     transform: translateY(-2px);
-    border-color: rgba(255, 214, 107, 0.18);
+    border-color: rgba(255, 214, 107, 0.28);
     background: rgba(255, 214, 107, 0.08);
 }
 
@@ -1505,7 +2168,9 @@ body {
 .question-text {
     margin-bottom: 28px;
     font-size: 1.24rem;
-    line-height: 1.7;
+    font-weight: 600;
+    line-height: 1.75;
+    color: #4f3a1f;
 }
 
 .question-mode-label {
@@ -1571,7 +2236,7 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.14);
     color: var(--text-accent);
     font-family: var(--font-title);
     font-size: 0.92rem;
@@ -1799,7 +2464,7 @@ body {
     font-family: var(--font-title);
     font-size: 2.55rem;
     font-weight: 900;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.08em;
 }
 
 .win-title {
@@ -1880,11 +2545,11 @@ body {
 }
 
 #winScreen.active {
-    background: radial-gradient(ellipse at 50% 30%, rgba(255, 214, 107, 0.1) 0%, var(--cave-dark) 72%);
+    background: radial-gradient(ellipse at 50% 30%, rgba(255, 214, 107, 0.22) 0%, var(--cave-dark) 72%);
 }
 
 #loseScreen.active {
-    background: radial-gradient(ellipse at 50% 50%, rgba(109, 62, 161, 0.12) 0%, var(--cave-dark) 72%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(232, 188, 212, 0.28) 0%, var(--cave-dark) 72%);
 }
 
 .screen-flash-correct {
@@ -2294,13 +2959,27 @@ body {
     .maze-header {
         flex-direction: column;
     }
+
+    .world-screen-header,
+    .world-stage-header {
+        flex-direction: column;
+    }
+
+    .maze-tools {
+        align-items: flex-start;
+    }
+
+    .maze-action-row {
+        justify-content: flex-start;
+    }
 }
 
 @media (max-width: 900px) {
     .start-layout {
         flex-direction: column;
-        gap: 26px;
-        padding: 22px 18px;
+        display: flex;
+        gap: 28px;
+        padding: 24px 20px;
     }
 
     .hero-image-section {
@@ -2327,18 +3006,43 @@ body {
 }
 
 @media (max-width: 768px) {
+    .world-map {
+        min-height: 640px;
+    }
+
+    .world-node {
+        width: 116px;
+    }
+
+    .world-node-visual {
+        width: 108px;
+        height: 108px;
+    }
+
+    .world-island-scene {
+        width: 96px;
+        height: 96px;
+        transform: none;
+    }
+
+    .world-node-card {
+        width: 156px;
+    }
+
     .screen {
         padding: 16px;
     }
 
     .title-line {
         font-size: 1.28rem;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.06em;
     }
 
     .title-line.accent {
         font-size: 2.1rem;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.08em;
+        margin: 5px 0 8px;
+        padding: 0.08em 0.1em 0.1em;
     }
 
     .game-hud {
@@ -2359,6 +3063,20 @@ body {
 
     .maze-map {
         min-height: 460px;
+    }
+
+    .maze-node {
+        width: 92px;
+        height: 118px;
+    }
+
+    .maze-node-visual {
+        width: 80px;
+        height: 80px;
+    }
+
+    .maze-node .node-label {
+        font-size: 0.62rem;
     }
 
     .stage-landmark {
@@ -2404,11 +3122,60 @@ body {
 
     .end-title {
         font-size: 2rem;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.06em;
     }
 }
 
 @media (max-width: 480px) {
+    .world-map {
+        min-height: 700px;
+    }
+
+    .world-node {
+        width: 98px;
+    }
+
+    .world-node-visual {
+        width: 92px;
+        height: 92px;
+    }
+
+    .world-node-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.76rem;
+    }
+
+    .world-island-scene {
+        width: 80px;
+        height: 80px;
+        transform: none;
+    }
+
+    .world-node-card {
+        width: 138px;
+        padding: 10px 9px;
+    }
+
+    .world-node-meta {
+        margin-top: 8px;
+        font-size: 0.68rem;
+    }
+
+    .world-node-chip {
+        margin-top: 8px;
+        padding: 6px 9px;
+        font-size: 0.62rem;
+    }
+
+    .world-node-title {
+        font-size: 0.68rem;
+    }
+
+    .world-node-meta {
+        font-size: 0.58rem;
+    }
+
     .hero-image-section {
         max-width: 280px;
     }
@@ -2423,6 +3190,28 @@ body {
 
     .maze-map {
         min-height: 400px;
+    }
+
+    .maze-node {
+        width: 78px;
+        height: 106px;
+    }
+
+    .maze-node-visual {
+        width: 68px;
+        height: 68px;
+    }
+
+    .maze-node .node-marker {
+        width: 28px;
+        height: 28px;
+        font-size: 0.74rem;
+    }
+
+    .maze-node .node-label {
+        bottom: -28px;
+        padding: 5px 8px;
+        font-size: 0.58rem;
     }
 
     .stage-landmark {
@@ -2442,6 +3231,7 @@ body {
 
     .btn-primary {
         width: 100%;
+        min-width: 0;
         padding: 15px 24px;
         font-size: 0.94rem;
     }

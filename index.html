@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -7,7 +7,7 @@
     <meta name="description" content="Hành Trình Thoát Khỏi Hang Động Plato - vượt mê cung hang động bằng tri thức triết học">
     <title>Hành Trình Thoát Khỏi Hang Động Plato</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Philosopher:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -29,7 +29,7 @@
             <div class="hero-image-section">
                 <div class="hero-image-wrapper">
                     <div class="hero-glow"></div>
-                    <img src="plato.png" alt="Plato tại cửa hang động" class="hero-image">
+                    <img src="images/plato.png" alt="Plato tại cửa hang động" class="hero-image">
                     <div class="hero-overlay"></div>
                 </div>
                 <p class="hero-caption">Bước qua bóng tối, mở từng cánh cổng bằng tri thức</p>
@@ -94,6 +94,34 @@
         </div>
     </div>
 
+    <div id="worldMapScreen" class="screen">
+        <div class="world-screen-shell">
+            <section class="world-stage">
+                <div class="world-stage-header">
+                    <div>
+                        <p class="maze-kicker">Hành trình mở khóa</p>
+                        <h2 class="maze-title">Bản đồ 6 ải tri thức</h2>
+                        <p class="maze-subtitle">Nhấn vào Ải 1 hoặc ải đang mở để bắt đầu. Ải đã hoàn thành sẽ sáng lên, ải chưa mở sẽ bị khóa.</p>
+                    </div>
+                    <div class="world-stage-note">
+                        <button class="btn-return-home world-home-button" onclick="backToStart()" aria-label="Quay lại trang chủ">
+                            <span class="return-icon">←</span>
+                            <span>Trang chủ</span>
+                        </button>
+                        <span class="world-note-pill current">Đang mở</span>
+                        <span class="world-note-pill locked">Bị khóa</span>
+                    </div>
+                </div>
+
+                <div class="world-map">
+                    <div class="world-stars"></div>
+                    <svg id="worldLinks" class="world-links-layer" preserveAspectRatio="none" aria-hidden="true"></svg>
+                    <div id="worldMapNodes" class="world-map-nodes"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
     <div id="gameScreen" class="screen">
         <div id="caveEnvironment">
             <div class="cave-walls"></div>
@@ -142,10 +170,22 @@
                         <h2 id="mazeTitle" class="maze-title">Ải 1 - Tìm đường tới cửa thoát</h2>
                         <p id="stageSubtitle" class="maze-subtitle">Chương hiện tại sẽ xuất hiện ở đây.</p>
                     </div>
-                    <div class="maze-legend">
-                        <span><i class="legend-dot player-dot"></i>Bạn</span>
-                        <span><i class="legend-dot gate-dot"></i>Cổng tri thức</span>
-                        <span><i class="legend-dot exit-dot"></i>Lối ra</span>
+                    <div class="maze-tools">
+                        <div class="maze-legend">
+                            <span><i class="legend-dot player-dot"></i>Bạn</span>
+                            <span><i class="legend-dot gate-dot"></i>Cổng tri thức</span>
+                            <span><i class="legend-dot exit-dot"></i>Lối ra</span>
+                        </div>
+                        <div class="maze-action-row">
+                            <button class="btn-return-home" onclick="showWorldMapScreen()" aria-label="Quay lại bản đồ 6 ải">
+                                <span class="return-icon">↺</span>
+                                <span>Bản đồ 6 ải</span>
+                            </button>
+                            <button class="btn-return-home" onclick="backToStart()" aria-label="Quay lại trang chủ">
+                                <span class="return-icon">←</span>
+                                <span>Trang chủ</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -164,16 +204,7 @@
                         <div class="person person-b"></div>
                         <div class="person person-c"></div>
                     </div>
-                    <div class="maze-path maze-path-a"></div>
-                    <div class="maze-path maze-path-b"></div>
-                    <div class="maze-path maze-path-c"></div>
-                    <div class="maze-path maze-path-d"></div>
-                    <div class="maze-path maze-path-e"></div>
-                    <div class="maze-path maze-path-f"></div>
-                    <div class="maze-path maze-path-g"></div>
-                    <div class="maze-path maze-path-h"></div>
-                    <div class="maze-path maze-path-i"></div>
-                    <div class="maze-path maze-path-j"></div>
+                    <svg id="mazeLinks" class="maze-links-layer" preserveAspectRatio="none" aria-hidden="true"></svg>
                     <div id="mazeNodes"></div>
                     <div id="playerToken" class="player-token">
                         <div class="player-shadow"></div>
