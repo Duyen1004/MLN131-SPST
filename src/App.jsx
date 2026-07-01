@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { WorldMap } from "@/components/world-map";
+import { getAssetPath } from "@/lib/utils";
 
 const pills = [
   "Mỗi chương là một ải riêng",
@@ -39,7 +40,7 @@ function HomeScreen({ onOpenMap }) {
             <div className="mx-auto w-full max-w-[390px]">
               <div className="overflow-hidden rounded-[34px] border border-[#e6d2a8] bg-[#fbf3dd] shadow-[0_24px_48px_rgba(123,94,42,0.14)]">
                 <img
-                  src="/images/plato.png"
+                  src={getAssetPath("images/plato.png")}
                   alt="Plato tại cửa hang động"
                   className="h-[340px] w-full object-cover object-center md:h-[390px] lg:h-[430px] xl:h-[470px]"
                 />

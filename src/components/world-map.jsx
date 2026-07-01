@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { lessonStages } from "@/data/gameplay";
 import { stages, worldMapLayout } from "@/data/stages";
-import { cn } from "@/lib/utils";
+import { cn, getAssetPath } from "@/lib/utils";
 
 function buildPath(start, end, index) {
   const deltaX = end.x - start.x;
@@ -105,7 +105,7 @@ export function WorldMap({
           className="relative min-h-0 flex-1 overflow-hidden rounded-[28px] border border-[#c7b18c] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_24px_54px_rgba(77,87,63,0.24)] lg:p-5"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, rgba(15, 23, 16, 0.22) 0%, rgba(48, 65, 49, 0.12) 34%, rgba(30, 43, 31, 0.24) 100%), url('/images/world-map-forest-mountain-bg.png')",
+              `linear-gradient(180deg, rgba(15, 23, 16, 0.22) 0%, rgba(48, 65, 49, 0.12) 34%, rgba(30, 43, 31, 0.24) 100%), url('${getAssetPath("images/world-map-forest-mountain-bg.png")}')`,
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}

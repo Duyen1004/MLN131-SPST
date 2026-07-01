@@ -1,33 +1,35 @@
+import { getAssetPath } from "@/lib/utils";
+
 export const stages = [
   {
     id: 1,
-    title: "Cổng khởi nguyên",
-    image: "/images/world-island-stage-1-clean.png"
+    title: "Cá»•ng khá»Ÿi nguyÃªn",
+    image: getAssetPath("images/world-island-stage-1-clean.png")
   },
   {
     id: 2,
-    title: "Nhà người dẫn đường",
-    image: "/images/world-island-stage-2-clean.png"
+    title: "NhÃ  ngÆ°á»i dáº«n Ä‘Æ°á»ng",
+    image: getAssetPath("images/world-island-stage-2-clean.png")
   },
   {
     id: 3,
-    title: "Đền chuyển hóa",
-    image: "/images/world-island-stage-3-clean.png"
+    title: "Äá»n chuyá»ƒn hÃ³a",
+    image: getAssetPath("images/world-island-stage-3-clean.png")
   },
   {
     id: 4,
-    title: "Tháp công lý",
-    image: "/images/world-island-stage-4-clean.png"
+    title: "ThÃ¡p cÃ´ng lÃ½",
+    image: getAssetPath("images/world-island-stage-4-clean.png")
   },
   {
     id: 5,
-    title: "Làng liên minh",
-    image: "/images/world-island-stage-5-clean.png"
+    title: "LÃ ng liÃªn minh",
+    image: getAssetPath("images/world-island-stage-5-clean.png")
   },
   {
     id: 6,
-    title: "Điện hòa hợp",
-    image: "/images/world-island-stage-6-clean.png"
+    title: "Äiá»‡n hÃ²a há»£p",
+    image: getAssetPath("images/world-island-stage-6-clean.png")
   }
 ];
 

@@ -1,3 +1,5 @@
+import { getAssetPath } from "@/lib/utils";
+
 const sharedNodeMeta = [
   { x: 12, y: 30, labelPlacement: "bottom", labelWidth: 132, type: "start" },
   { x: 24, y: 14, labelPlacement: "bottom", labelWidth: 154, type: "challenge", questionIndex: 0 },
@@ -17,7 +19,7 @@ function createMazeLayout(stageNumber, labels) {
     id: index,
     ...node,
     label: labels[index],
-    image: `/images/stage-${stageNumber}-node-${Math.min(index, 10) || 1}.png`
+    image: getAssetPath(`images/stage-${stageNumber}-node-${Math.min(index, 10) || 1}.png`)
   }));
 }
 
@@ -827,7 +829,7 @@ export const lessonStages = [
       "Nắm khái niệm, đối tượng nghiên cứu, cơ sở hình thành và ý nghĩa phương pháp luận của chủ nghĩa xã hội khoa học.",
     landmark: "Cổng khởi nguyên",
     theme: "mountain-cave",
-    backgroundImage: "/images/stage-1-bg-v2.png",
+    backgroundImage: getAssetPath("images/stage-1-bg-v2.png"),
     questions: stage1Questions
   },
   {
@@ -837,7 +839,7 @@ export const lessonStages = [
       "Hiểu cơ sở khách quan, điều kiện chủ quan và nội dung cơ bản trong sứ mệnh lịch sử của giai cấp công nhân.",
     landmark: "Nhà người dẫn đường",
     theme: "forest-lodge",
-    backgroundImage: "/images/stage-2-bg-v2.png",
+    backgroundImage: getAssetPath("images/stage-2-bg-v2.png"),
     questions: stage2Questions
   },
   {
@@ -847,7 +849,7 @@ export const lessonStages = [
       "Nắm đặc điểm, tính tất yếu và những nhiệm vụ cơ bản của thời kỳ quá độ lên chủ nghĩa xã hội.",
     landmark: "Đền chuyển hóa",
     theme: "temple-pass",
-    backgroundImage: "/images/stage-3-bg-v2.png",
+    backgroundImage: getAssetPath("images/stage-3-bg-v2.png"),
     questions: stage3Questions
   },
   {
@@ -857,7 +859,7 @@ export const lessonStages = [
       "Hiểu bản chất, chức năng và mối quan hệ giữa dân chủ xã hội chủ nghĩa với nhà nước xã hội chủ nghĩa.",
     landmark: "Tháp công lý",
     theme: "justice-tower",
-    backgroundImage: "/images/stage-4-bg-v2.png",
+    backgroundImage: getAssetPath("images/stage-4-bg-v2.png"),
     questions: stage4Questions
   },
   {
@@ -867,7 +869,7 @@ export const lessonStages = [
       "Nắm vai trò của cơ cấu xã hội - giai cấp và liên minh công nhân, nông dân, trí thức trong thời kỳ quá độ.",
     landmark: "Làng liên minh",
     theme: "alliance-village",
-    backgroundImage: "/images/stage-5-bg-v2.png",
+    backgroundImage: getAssetPath("images/stage-5-bg-v2.png"),
     questions: stage5Questions
   },
   {
@@ -877,7 +879,7 @@ export const lessonStages = [
       "Hiểu cách tiếp cận và giải quyết các vấn đề dân tộc, tôn giáo, gia đình trong thời kỳ quá độ lên chủ nghĩa xã hội.",
     landmark: "Điện hòa hợp",
     theme: "harmony-hall",
-    backgroundImage: "/images/stage-6-bg-v2.png",
+    backgroundImage: getAssetPath("images/stage-6-bg-v2.png"),
     questions: stage6Questions
   }
 ];
