@@ -5,13 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Hành Trình Thoát Khỏi Hang Động Plato - giao diện React, Tailwind, shadcn-style"
+      content="H&#224;nh Tr&#236;nh Tho&#225;t Kh&#7887;i Hang &#272;&#7897;ng Plato - giao di&#7879;n React, Tailwind, shadcn-style"
     />
-    <title>Hành Trình Thoát Khỏi Hang Động Plato</title>
-    <script type="module" crossorigin src="./assets/index-CQ-u4ps5.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BbtFwHUB.css">
+    <title>H&#224;nh Tr&#236;nh Tho&#225;t Kh&#7887;i Hang &#272;&#7897;ng Plato</title>
+    <script type="module" crossorigin src="/MLN131-SPST/assets/index-CQ-u4ps5.js"></script>
+    <link rel="stylesheet" crossorigin href="/MLN131-SPST/assets/index-BbtFwHUB.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      const isGitHubPages = window.location.hostname.endsWith("github.io");
+      const hasBuiltBundle = Array.from(document.scripts).some((scriptTag) => {
+        const src = scriptTag.getAttribute("src") || "";
+        return /assets\/index-.*\.js$/.test(src);
+      });
+
+      if (isGitHubPages && !hasBuiltBundle) {
+        const currentPath = window.location.pathname;
+        const normalizedPath = currentPath.endsWith("/")
+          ? currentPath
+          : `${currentPath}/`;
+
+        if (!normalizedPath.endsWith("/dist/")) {
+          window.location.replace(
+            `${window.location.origin}${normalizedPath}dist/`
+          );
+        }
+      }
+    </script>
   </body>
 </html>
