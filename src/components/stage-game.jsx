@@ -736,7 +736,7 @@ export function StageGame({ stageId = 1, onBack, onStageComplete }) {
                     onClick={handleCompletionClose}
                     className="mt-7 h-12 rounded-full bg-[linear-gradient(180deg,#ffe59b,#f2c85c)] px-8 font-title text-[15px] font-black tracking-[0.04em] text-[#553916] shadow-[0_18px_34px_rgba(224,174,56,0.24)] transition hover:brightness-105"
                   >
-                    Về bản đồ
+                    {upcomingStage ? "Về bản đồ" : "Hội tụ 6 bảo vật"}
                   </Button>
                 </>
               )}

@@ -149,6 +149,7 @@ export default function App() {
   const [selectedStage, setSelectedStage] = useState(null);
   const [highestUnlockedStage, setHighestUnlockedStage] = useState(1);
   const [pendingUnlockedStageId, setPendingUnlockedStageId] = useState(null);
+  const [collectedTreasureIds, setCollectedTreasureIds] = useState([]);
 
   useEffect(() => {
     criticalAssets.forEach((asset) => {
@@ -159,6 +160,8 @@ export default function App() {
   }, []);
 
   function handleStageComplete(stageId) {
+    setCollectedTreasureIds((prev) => (prev.includes(stageId) ? prev : [...prev, stageId]));
+
     const nextUnlockedStage = Math.min(6, stageId + 1);
 
     setHighestUnlockedStage((prev) => {
@@ -173,6 +176,7 @@ export default function App() {
   function handleReset() {
     setHighestUnlockedStage(1);
     setPendingUnlockedStageId(null);
+    setCollectedTreasureIds([]);
     setSelectedStage(null);
     setScreen("home");
   }
@@ -192,13 +196,6 @@ export default function App() {
               <ArrowLeft className="h-4 w-4" />
               Quay lại trang chủ
             </Button>
-            <Button
-              variant="secondary"
-              onClick={() => setScreen("reward")}
-              className="h-10 border-[#ecc67e] bg-amber-50/90 px-4 text-sm font-bold text-amber-700 hover:bg-amber-100/90"
-            >
-              🏆 Demo Kết Game
-            </Button>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">
             <WorldMap
@@ -215,7 +212,8 @@ export default function App() {
           </div>
         </div>
       ) : screen === "reward" ? (
-        <FinalReward 
+        <FinalReward
+          earnedTreasureIds={collectedTreasureIds}
           onReset={handleReset}
           onBackToHome={() => setScreen("home")}
         />
@@ -223,7 +221,7 @@ export default function App() {
         <StageGame
           stageId={selectedStage ?? 1}
           onBack={() => {
-            if (selectedStage === 6) {
+            if (selectedStage === 6 && collectedTreasureIds.length >= 6) {
               setScreen("reward");
             } else {
               setScreen("map");
