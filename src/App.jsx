@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { WorldMap } from "@/components/world-map";
+import { FinalReward } from "@/components/final-reward";
 import { getAssetPath } from "@/lib/utils";
 
 const pills = [
@@ -169,13 +170,20 @@ export default function App() {
     });
   }
 
+  function handleReset() {
+    setHighestUnlockedStage(1);
+    setPendingUnlockedStageId(null);
+    setSelectedStage(null);
+    setScreen("home");
+  }
+
   return (
     <main className="h-screen overflow-hidden bg-hero-light px-4 py-4 text-foreground lg:px-6">
       {screen === "home" ? (
         <HomeScreen onOpenMap={() => setScreen("map")} />
       ) : screen === "map" ? (
         <div className="mx-auto flex h-full max-w-[1320px] flex-col gap-2 overflow-hidden">
-          <div className="shrink-0">
+          <div className="shrink-0 flex gap-2">
             <Button
               variant="secondary"
               onClick={() => setScreen("home")}
@@ -183,6 +191,13 @@ export default function App() {
             >
               <ArrowLeft className="h-4 w-4" />
               Quay lại trang chủ
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => setScreen("reward")}
+              className="h-10 border-[#ecc67e] bg-amber-50/90 px-4 text-sm font-bold text-amber-700 hover:bg-amber-100/90"
+            >
+              🏆 Demo Kết Game
             </Button>
           </div>
           <div className="min-h-0 flex-1 overflow-hidden">
@@ -199,10 +214,21 @@ export default function App() {
             />
           </div>
         </div>
+      ) : screen === "reward" ? (
+        <FinalReward 
+          onReset={handleReset}
+          onBackToHome={() => setScreen("home")}
+        />
       ) : (
         <StageGame
           stageId={selectedStage ?? 1}
-          onBack={() => setScreen("map")}
+          onBack={() => {
+            if (selectedStage === 6) {
+              setScreen("reward");
+            } else {
+              setScreen("map");
+            }
+          }}
           onStageComplete={handleStageComplete}
         />
       )}
