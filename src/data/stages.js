@@ -3,32 +3,32 @@ import { getAssetPath } from "@/lib/utils";
 export const stages = [
   {
     id: 1,
-    title: "Cá»•ng khá»Ÿi nguyÃªn",
+    title: "Cổng khởi nguyên",
     image: getAssetPath("images/world-island-stage-1-clean.png")
   },
   {
     id: 2,
-    title: "NhÃ  ngÆ°á»i dáº«n Ä‘Æ°á»ng",
+    title: "Nhà người dẫn đường",
     image: getAssetPath("images/world-island-stage-2-clean.png")
   },
   {
     id: 3,
-    title: "Äá»n chuyá»ƒn hÃ³a",
+    title: "Đền chuyển hóa",
     image: getAssetPath("images/world-island-stage-3-clean.png")
   },
   {
     id: 4,
-    title: "ThÃ¡p cÃ´ng lÃ½",
+    title: "Tháp công lý",
     image: getAssetPath("images/world-island-stage-4-clean.png")
   },
   {
     id: 5,
-    title: "LÃ ng liÃªn minh",
+    title: "Làng liên minh",
     image: getAssetPath("images/world-island-stage-5-clean.png")
   },
   {
     id: 6,
-    title: "Äiá»‡n hÃ²a há»£p",
+    title: "Điện hòa hợp",
     image: getAssetPath("images/world-island-stage-6-clean.png")
   }
 ];

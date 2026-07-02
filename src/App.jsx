@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowLeft, SunMedium } from "lucide-react";
 import { StageGame } from "@/components/stage-game";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +31,11 @@ const features = [
   }
 ];
 
+const criticalAssets = [
+  "images/plato.png",
+  "images/world-map-forest-mountain-bg.png"
+];
+
 function HomeScreen({ onOpenMap }) {
   return (
     <div className="mx-auto flex h-full max-w-[1320px] items-center">
@@ -42,6 +47,9 @@ function HomeScreen({ onOpenMap }) {
                 <img
                   src={getAssetPath("images/plato.png")}
                   alt="Plato tại cửa hang động"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-[340px] w-full object-cover object-center md:h-[390px] lg:h-[430px] xl:h-[470px]"
                 />
               </div>
@@ -87,12 +95,11 @@ function HomeScreen({ onOpenMap }) {
               <Card className="rounded-[30px] border-[#ecdcb8] bg-[linear-gradient(180deg,rgba(255,251,241,0.98),rgba(250,241,220,0.94))] shadow-[0_16px_34px_rgba(198,162,88,0.12)]">
                 <CardContent className="space-y-3 p-4 xl:p-5">
                   <p className="text-[15px] leading-7 text-[#755d3f]">
-                    Bạn sẽ vượt qua từng{" "}
-                    <strong className="font-extrabold text-[#b87b1d]">ải theo chương học.</strong>{" "}
+                    Bạn sẽ vượt qua từng <strong className="font-extrabold text-[#b87b1d]">ải theo chương học.</strong>{" "}
                     Trong mỗi ải, bạn di chuyển qua các cổng tri thức gắn với nội dung của chương đó.
                     Khi kết thúc ải, một màn{" "}
-                    <strong className="font-extrabold text-[#b87b1d]">Thử thách vượt ải</strong>{" "}
-                    sẽ xuất hiện để ôn tập trước khi sang chương tiếp theo.
+                    <strong className="font-extrabold text-[#b87b1d]">Thử thách vượt ải</strong> sẽ xuất hiện để
+                    ôn tập trước khi sang chương tiếp theo.
                   </p>
 
                   <div className="rounded-[18px] border border-[#f4c6c8] bg-[#ffe8ea] px-5 py-2.5 text-[13px] font-semibold text-[#d56f7f]">
@@ -112,12 +119,8 @@ function HomeScreen({ onOpenMap }) {
                         {feature.icon}
                       </div>
                       <div>
-                        <h3 className="font-title text-[16px] font-bold text-[#5b411f]">
-                          {feature.title}
-                        </h3>
-                        <p className="mt-0.5 text-[12px] leading-5 text-[#8b6f49]">
-                          {feature.description}
-                        </p>
+                        <h3 className="font-title text-[16px] font-bold text-[#5b411f]">{feature.title}</h3>
+                        <p className="mt-0.5 text-[12px] leading-5 text-[#8b6f49]">{feature.description}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -145,6 +148,14 @@ export default function App() {
   const [selectedStage, setSelectedStage] = useState(null);
   const [highestUnlockedStage, setHighestUnlockedStage] = useState(1);
   const [pendingUnlockedStageId, setPendingUnlockedStageId] = useState(null);
+
+  useEffect(() => {
+    criticalAssets.forEach((asset) => {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = getAssetPath(asset);
+    });
+  }, []);
 
   function handleStageComplete(stageId) {
     const nextUnlockedStage = Math.min(6, stageId + 1);

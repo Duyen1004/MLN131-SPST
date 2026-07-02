@@ -184,6 +184,8 @@ export function WorldMap({
                       <img
                         src={stage.image}
                         alt={stage.title}
+                        loading="eager"
+                        decoding="async"
                         className={cn(
                           "h-full w-full object-cover",
                           locked ? "brightness-[0.42] saturate-[0.55]" : "brightness-[0.96] saturate-[0.92]"
@@ -258,66 +260,42 @@ export function WorldMap({
               <Card className="w-full max-w-[500px] overflow-hidden rounded-[28px] border-[#e5cf9c] bg-[linear-gradient(180deg,rgba(255,252,245,0.98),rgba(247,236,207,0.96))] shadow-[0_26px_70px_rgba(40,30,16,0.26)]">
                 <CardContent className="p-5 lg:p-6">
                   <div className="relative mb-4 flex justify-center">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="h-20 w-20 rounded-full bg-[#ffe18d]/35 blur-2xl animate-pulse" />
-                    </div>
-                    <div className="absolute top-1/2 h-16 w-16 -translate-y-1/2 rounded-full border border-[#f3d58d]/70 animate-ping" />
-                    <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-[#f0d38b] bg-[radial-gradient(circle_at_30%_30%,#fff7dd,#f5cc63)] shadow-[0_0_40px_rgba(244,206,101,0.5)]">
-                      <div className="absolute inset-2 rounded-full border border-white/45" />
-                      <LockOpen className="h-7 w-7 text-[#6e4a16]" />
+                    <div className="absolute inset-x-14 top-1/2 h-px -translate-y-1/2 bg-[linear-gradient(90deg,transparent,rgba(216,183,108,0.75),transparent)]" />
+                    <div className="relative flex h-20 w-20 items-center justify-center rounded-full border border-[#e8c778] bg-[radial-gradient(circle_at_top,#fff6dd,#f4c85b)] shadow-[0_14px_36px_rgba(208,163,54,0.24)]">
+                      <LockOpen className="h-8 w-8 text-[#6e4a16]" />
                     </div>
                   </div>
 
-                  <p className="mb-3 text-center text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9c6e1e]">
-                    Mở khóa thành công
-                  </p>
-                  <h3 className="text-center font-title text-[24px] font-black leading-tight text-[#4f3718]">
-                    Ải {unlockedStageDetail.id} đã được mở
-                  </h3>
-                  <p className="mt-2.5 text-center text-[14px] leading-6 text-[#735d3c]">
-                    Cánh cổng mới vừa bừng sáng trên bản đồ:
-                    <span className="font-bold text-[#9b6d1c]">
-                      {" "}
-                      {unlockedStageDetail.landmark ?? unlockedStageDetail.title}
-                    </span>
-                    .
-                  </p>
-
-                  <div className="mt-4 rounded-[22px] border border-[#eadbb7] bg-white/68 p-3.5 shadow-[0_10px_24px_rgba(190,152,74,0.12)]">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7a48]">
-                      Ải kế tiếp
+                  <div className="text-center">
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.24em] text-[#b1822e]">
+                      Cánh cổng mới đã sáng
                     </p>
-                    <p className="mt-1 font-title text-[18px] font-black leading-tight text-[#4f3718]">
+                    <h3 className="mt-2 font-title text-[31px] font-black leading-tight text-[#4f3718]">
                       {unlockedStageDetail.title}
+                    </h3>
+                    <p className="mt-3 text-[14px] leading-6 text-[#755d3f]">
+                      Bạn đã mở khóa thành công chặng tiếp theo trên bản đồ. Hãy tiến vào khi đã sẵn sàng.
                     </p>
-                    <p className="mt-2 text-[13px] leading-5 text-[#735d3c]">
-                      {unlockedStageDetail.objective}
-                    </p>
-                    <div className="mt-3 flex items-center gap-3 rounded-[16px] border border-[#f0ddb2] bg-[#fff9ea] px-3 py-2">
-                      <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-[#e2bc69] bg-[#f7ebc7] shadow-[0_6px_16px_rgba(178,139,58,0.2)]">
-                        <img
-                          src={unlockedStageDetail.backgroundImage}
-                          alt={unlockedStageDetail.title}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div className="text-left">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#a17b3f]">
-                          Cánh cổng mới
-                        </p>
-                        <p className="font-semibold text-[#6c4c1f]">
-                          {unlockedStageDetail.landmark ?? unlockedStageDetail.title}
-                        </p>
-                      </div>
-                    </div>
                   </div>
 
-                  <div className="mt-4 flex justify-center">
+                  <div className="mt-5 rounded-[22px] border border-[#efdfb9] bg-[#fffaf0] p-3.5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#a17b3f]">
+                      Điểm đến tiếp theo
+                    </p>
+                    <p className="mt-1 font-title text-[18px] font-black text-[#5a3f1c]">
+                      {unlockedStageDetail.landmark ?? unlockedStageDetail.title}
+                    </p>
+                    <p className="mt-1 text-[12px] leading-5 text-[#7d6440]">
+                      Hoàn thành ải hiện tại để tiếp tục chinh phục toàn bộ hành trình tri thức.
+                    </p>
+                  </div>
+
+                  <div className="mt-5 flex justify-center">
                     <Button
                       onClick={handleDismissUnlock}
-                      className="h-10 rounded-full bg-[linear-gradient(180deg,#ffe59b,#f2c85c)] px-7 text-[#553916]"
+                      className="h-11 rounded-full bg-[linear-gradient(180deg,#ffe59b,#f2c85c)] px-6 font-title text-[14px] font-black tracking-[0.04em] text-[#553916]"
                     >
-                      Tiếp tục khám phá
+                      Tiếp tục hành trình
                     </Button>
                   </div>
                 </CardContent>
