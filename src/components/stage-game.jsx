@@ -1,10 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ChevronLeft, ChevronRight, Heart, MapPinned } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Heart, MapPinned, Gem, Compass, Flame, Scale, Shield, Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { lessonStages, mazeLayouts } from "@/data/gameplay";
 import { cn } from "@/lib/utils";
+
+const STAGE_TREASURES = {
+  1: { name: "Đá Khởi Nguyên", desc: "Bảo vật tượng trưng cho khởi nguồn tri thức triết học", icon: Gem, color: "from-blue-400 to-indigo-600" },
+  2: { name: "Kính Dẫn Đường", desc: "Bảo vật định hướng con đường thoát khỏi hang tối", icon: Compass, color: "from-teal-400 to-emerald-600" },
+  3: { name: "Lư Hương Chuyển Hóa", desc: "Bảo vật cải biến nhận thức biện chứng khoa học", icon: Flame, color: "from-orange-400 to-red-600" },
+  4: { name: "Cán Cân Công Lý", desc: "Bảo vật cân bằng lẽ phải, dân chủ và pháp quyền", icon: Scale, color: "from-amber-400 to-yellow-600" },
+  5: { name: "Ấn Tín Liên Minh", desc: "Bảo vật kết nối đại đoàn kết toàn dân tộc", icon: Shield, color: "from-purple-400 to-pink-600" },
+  6: { name: "Chuông Hòa Hợp", desc: "Bảo vật hòa quyện các giá trị dân tộc, tôn giáo và gia đình", icon: Bell, color: "from-sky-400 to-blue-600" }
+};
 
 function buildPath(start, end, index) {
   const deltaX = end.x - start.x;
@@ -55,6 +64,7 @@ export function StageGame({ stageId = 1, onBack, onStageComplete }) {
   const [finished, setFinished] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [showDefeatModal, setShowDefeatModal] = useState(false);
+  const [completionStep, setCompletionStep] = useState(1);
 
   const currentNode = nodes[playerNode];
   const nextNodeWithQuestion = nodes.find(
@@ -95,6 +105,7 @@ export function StageGame({ stageId = 1, onBack, onStageComplete }) {
     setQuestionState(null);
     setFinished(false);
     setShowCompletionModal(false);
+    setCompletionStep(1);
     setShowDefeatModal(false);
   }
 
@@ -201,6 +212,7 @@ export function StageGame({ stageId = 1, onBack, onStageComplete }) {
     setQuestionState(null);
     setFinished(false);
     setShowCompletionModal(false);
+    setCompletionStep(1);
     setShowDefeatModal(false);
   }, [stage.id]);
 
@@ -610,67 +622,124 @@ export function StageGame({ stageId = 1, onBack, onStageComplete }) {
             <CardContent className="relative p-6 text-center lg:p-8">
               <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(255,225,141,0.34),transparent_72%)]" />
               <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(201,155,69,0.55),transparent)]" />
-              <div className="relative mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-[#edd8a8] bg-[#fff8e8] px-4 py-1.5 shadow-[0_10px_24px_rgba(210,173,91,0.12)]">
-                <span className="h-2 w-2 rounded-full bg-[#e0b145]" />
-                <span className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#a87928]">
-                  Hoàn thành ải
-                </span>
-              </div>
-              <p className="sr-only">
-                Hoàn thành ải
-              </p>
-              <p className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#be8d34]">
-                Chặng {stage.id} đã khép lại
-              </p>
-              <h3 className="mt-2 font-title text-[32px] font-black leading-[1.08] text-[#4f3718] lg:text-[36px]">
-                Bạn đã vượt qua {stage.landmark ?? stage.title}
-              </h3>
-              <p className="mx-auto mt-4 max-w-[540px] text-[15px] leading-7 text-[#755d3f] lg:text-[16px]">
-                Bạn đã trả lời xong toàn bộ {totalQuestions} câu hỏi của chương này. Cánh cổng tiếp theo trên bản đồ đã sẵn sàng chờ bạn khám phá.
-              </p>
+              
+              {completionStep === 1 ? (
+                // Step 1: Treasure Award Display!
+                (() => {
+                  const treasure = STAGE_TREASURES[stage.id];
+                  const IconComponent = treasure?.icon;
+                  return (
+                    <div className="flex flex-col items-center py-4">
+                      <div className="relative mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-[#edd8a8] bg-[#fff8e8] px-4 py-1.5 shadow-[0_10px_24px_rgba(210,173,91,0.12)]">
+                        <span className="h-2 w-2 rounded-full bg-[#e0b145]" />
+                        <span className="text-[11px] font-extrabold tracking-[0.22em] text-[#a87928]">
+                          Bảo vật được mở khóa
+                        </span>
+                      </div>
 
-              <div className="mt-6 rounded-[28px] border border-[#ead9b2] bg-[linear-gradient(180deg,rgba(255,255,255,0.76),rgba(255,248,231,0.92))] p-4 text-left shadow-[0_18px_40px_rgba(186,149,74,0.12)] lg:p-5">
-                {upcomingStage ? (
-                  <div className="mb-4 flex items-center gap-3 rounded-[18px] border border-[#efdfb9] bg-[#fffaf0] px-3.5 py-3">
-                    <div className="hidden h-16 w-16 shrink-0 overflow-hidden rounded-[18px] border-2 border-[#e8c778] bg-[#f8ebc6] shadow-[0_10px_24px_rgba(171,132,57,0.16)] sm:block">
-                      <img
-                        src={upcomingStage.backgroundImage}
-                        alt={upcomingStage.title}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[radial-gradient(circle,#ffe8a4,#f1c55a)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#6c4918] shadow-[0_8px_18px_rgba(202,161,73,0.25)]">
-                      Ải {upcomingStage.id}
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#a17b3f]">
-                        Cánh cổng mới
+                      <p className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#be8d34]">
+                        Hoàn thành Ải {stage.id}
                       </p>
-                      <p className="font-semibold text-[#6c4c1f]">
-                        {upcomingStage.landmark ?? upcomingStage.title}
-                      </p>
+                      
+                      <h3 className="mt-2 font-title text-[30px] font-black leading-[1.1] text-[#4f3718] lg:text-[34px]">
+                        Bạn đã nhận được bảo vật!
+                      </h3>
+
+                      {/* Floating, glowing treasure icon container */}
+                      <div className="relative flex items-center justify-center w-36 h-36 my-6">
+                        {/* Golden rays and aura */}
+                        <div className="absolute inset-0 rounded-full bg-amber-400/25 blur-xl animate-pulse" />
+                        <div className="absolute inset-[-10px] rounded-full border-2 border-dashed border-amber-300/30 animate-spin" style={{ animationDuration: '15s' }} />
+                        <div className="absolute inset-0 rounded-full border border-amber-300/20" />
+                        
+                        {/* Main icon */}
+                        <div className={`relative flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br ${treasure?.color} text-white shadow-xl`}>
+                          {IconComponent && <IconComponent className="w-11 h-11 drop-shadow-md" />}
+                        </div>
+                      </div>
+
+                      <div className="max-w-[480px] text-center space-y-2">
+                        <h4 className="font-title text-2xl font-black text-amber-900 leading-tight">
+                          {treasure?.name}
+                        </h4>
+                        <p className="text-sm text-[#755d3f] leading-relaxed">
+                          {treasure?.desc}
+                        </p>
+                      </div>
+
+                      <Button
+                        onClick={() => setCompletionStep(2)}
+                        className="mt-8 h-12 min-w-[200px] rounded-full bg-[linear-gradient(180deg,#ffe59b,#f2c85c)] px-8 font-title text-[15px] font-black tracking-[0.04em] text-[#553916] shadow-[0_18px_34px_rgba(224,174,56,0.24)] transition hover:brightness-105"
+                      >
+                        Thu nhận
+                      </Button>
                     </div>
+                  );
+                })()
+              ) : (
+                // Step 2: Next stage details
+                <>
+                  <div className="relative mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-[#edd8a8] bg-[#fff8e8] px-4 py-1.5 shadow-[0_10px_24px_rgba(210,173,91,0.12)]">
+                    <span className="h-2 w-2 rounded-full bg-[#e0b145]" />
+                    <span className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#a87928]">
+                      Hoàn thành ải
+                    </span>
                   </div>
-                ) : null}
-                <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#a87928]">
-                  Điểm đến tiếp theo
-                </p>
-                <h4 className="mt-2 font-title text-[22px] font-black leading-tight text-[#4f3718] lg:text-[25px]">
-                  {upcomingStage ? upcomingStage.title : "Bạn đã hoàn thành toàn bộ hành trình"}
-                </h4>
-                <p className="mt-2 text-[14px] leading-6 text-[#755d3f]">
-                  {upcomingStage
-                    ? `Rời ải hiện tại để trở về bản đồ và mở lối sang ${upcomingStage.landmark ?? upcomingStage.title}.`
-                    : "Đây là ải cuối cùng. Bạn đã đi hết toàn bộ hành trình của mê cung tri thức."}
-                </p>
-              </div>
 
-              <Button
-                onClick={handleCompletionClose}
-                className="mt-7 h-12 rounded-full bg-[linear-gradient(180deg,#ffe59b,#f2c85c)] px-8 font-title text-[15px] font-black tracking-[0.04em] text-[#553916] shadow-[0_18px_34px_rgba(224,174,56,0.24)] transition hover:brightness-105"
-              >
-                Về bản đồ
-              </Button>
+                  <p className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#be8d34]">
+                    Chặng {stage.id} đã khép lại
+                  </p>
+                  <h3 className="mt-2 font-title text-[32px] font-black leading-[1.08] text-[#4f3718] lg:text-[36px]">
+                    Bạn đã vượt qua {stage.landmark ?? stage.title}
+                  </h3>
+                  <p className="mx-auto mt-4 max-w-[540px] text-[15px] leading-7 text-[#755d3f] lg:text-[16px]">
+                    Bạn đã trả lời xong toàn bộ {totalQuestions} câu hỏi của chương này. Cánh cổng tiếp theo trên bản đồ đã sẵn sàng chờ bạn khám phá.
+                  </p>
+
+                  <div className="mt-6 rounded-[28px] border border-[#ead9b2] bg-[linear-gradient(180deg,rgba(255,255,255,0.76),rgba(255,248,231,0.92))] p-4 text-left shadow-[0_18px_40px_rgba(186,149,74,0.12)] lg:p-5">
+                    {upcomingStage ? (
+                      <div className="mb-4 flex items-center gap-3 rounded-[18px] border border-[#efdfb9] bg-[#fffaf0] px-3.5 py-3">
+                        <div className="hidden h-16 w-16 shrink-0 overflow-hidden rounded-[18px] border-2 border-[#e8c778] bg-[#f8ebc6] shadow-[0_10px_24px_rgba(171,132,57,0.16)] sm:block">
+                          <img
+                            src={upcomingStage.backgroundImage}
+                            alt={upcomingStage.title}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[radial-gradient(circle,#ffe8a4,#f1c55a)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#6c4918] shadow-[0_8px_18px_rgba(202,161,73,0.25)]">
+                          Ải {upcomingStage.id}
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#a17b3f]">
+                            Cánh cổng mới
+                          </p>
+                          <p className="font-semibold text-[#6c4c1f]">
+                            {upcomingStage.landmark ?? upcomingStage.title}
+                          </p>
+                        </div>
+                      </div>
+                    ) : null}
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#a87928]">
+                      Điểm đến tiếp theo
+                    </p>
+                    <h4 className="mt-2 font-title text-[22px] font-black leading-tight text-[#4f3718] lg:text-[25px]">
+                      {upcomingStage ? upcomingStage.title : "Bạn đã hoàn thành toàn bộ hành trình"}
+                    </h4>
+                    <p className="mt-2 text-[14px] leading-6 text-[#755d3f]">
+                      {upcomingStage
+                        ? `Rời ải hiện tại để trở về bản đồ và mở lối sang ${upcomingStage.landmark ?? upcomingStage.title}.`
+                        : "Đây là ải cuối cùng. Bạn đã đi hết toàn bộ hành trình của mê cung tri thức."}
+                    </p>
+                  </div>
+
+                  <Button
+                    onClick={handleCompletionClose}
+                    className="mt-7 h-12 rounded-full bg-[linear-gradient(180deg,#ffe59b,#f2c85c)] px-8 font-title text-[15px] font-black tracking-[0.04em] text-[#553916] shadow-[0_18px_34px_rgba(224,174,56,0.24)] transition hover:brightness-105"
+                  >
+                    Về bản đồ
+                  </Button>
+                </>
+              )}
             </CardContent>
           </Card>
         </div>
